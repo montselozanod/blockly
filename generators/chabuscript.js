@@ -13,4 +13,9 @@
   * Chabuscript code generator.
   * @type {!Blockly.Generator}
   */
- Blockly.Chabuscript = new Blockly.Generator('Chabuscript');
+Blockly.Chabuscript = new Blockly.Generator('Chabuscript');
+
+Blockly.Chabuscript.addReservedWords(
+  '
+  '
+);
