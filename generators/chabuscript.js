@@ -67,3 +67,83 @@ Blockly.Chabuscript.ORDER_NONE = 99;          // (...)
    }
    Blockly.Chabuscript.definitions_['variables'] = defvars.join('\n');
  };
+
+ /**
+  * Prepend the generated code with the variable definitions.
+  * @param {string} code Generated code.
+  * @return {string} Completed code.
+  */
+  Blockly.Chabuscript.finish = function(code) {
+    // Convert the definitions dictionary into a list.
+    var definitions = [];
+    for (var name in Blockly.Chabuscript.definitions_) {
+      definitions.push(Blockly.Chabuscript.definitions_[name]);
+    }
+    // Clean up temporary data.
+    delete Blockly.Chabuscript.definitions_;
+    delete Blockly.Chabuscript.functionNames_;
+    Blockly.Chabuscript.variableDB_.reset();
+    return definitions.join('\n\n') + '\n\n\n' + code;
+  };
+
+  /**
+   * Naked values are top-level blocks with outputs that aren't plugged into
+   * anything.  A trailing semicolon is needed to make this legal.
+   * @param {string} line Line of generated code.
+   * @return {string} Legal line of code.
+   */
+  Blockly.Chabuscript.scrubNakedValue = function(line) {
+    return line + ';\n';
+  };
+
+  /**
+   * Encode a string as a properly escaped Chabuscript string, complete with
+   * quotes.
+   * @param {string} string Text to encode.
+   * @return {string} Chabuscript string.
+   * @private
+   */
+  Blockly.Chabuscript.quote_ = function(string) {
+    // TODO: This is a quick hack.  Replace with goog.string.quote
+    string = string.replace(/\\/g, '\\\\')
+                   .replace(/\n/g, '\\\n')
+                   .replace(/'/g, '\\\'');
+    return '\'' + string + '\'';
+  };
+
+  /**
+   * Common tasks for generating Chabuscript from blocks.
+   * Handles comments for the specified block and any connected value blocks.
+   * Calls any statements following this block.
+   * @param {!Blockly.Block} block The current block.
+   * @param {string} code The Chabuscript code created for this block.
+   * @return {string} Chabuscript code with comments and subsequent blocks added.
+   * @private
+   */
+  Blockly.Chabuscript.scrub_ = function(block, code) {
+    var commentCode = '';
+    // Only collect comments for blocks that aren't inline.
+    if (!block.outputConnection || !block.outputConnection.targetConnection) {
+      // Collect comment for this block.
+      var comment = block.getCommentText();
+      if (comment) {
+        commentCode += Blockly.Chabuscript.prefixLines(comment, '// ') + '\n';
+      }
+      // Collect comments for all value arguments.
+      // Don't collect comments for nested statements.
+      for (var x = 0; x < block.inputList.length; x++) {
+        if (block.inputList[x].type == Blockly.INPUT_VALUE) {
+          var childBlock = block.inputList[x].connection.targetBlock();
+          if (childBlock) {
+            var comment = Blockly.Chabuscript.allNestedComments(childBlock);
+            if (comment) {
+              commentCode += Blockly.Chabuscript.prefixLines(comment, '// ');
+            }
+          }
+        }
+      }
+    }
+    var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    var nextCode = Blockly.Chabuscript.blockToCode(nextBlock);
+    return commentCode + code + nextCode;
+  };
