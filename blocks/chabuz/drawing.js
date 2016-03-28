@@ -61,6 +61,50 @@ Blockly.Blocks['line'] = {
   }
 };
 
+Blockly.Blocks['polygon'] = {
+  init: function() {
+    this.appendValueInput("points")
+        .setCheck("list")
+        .appendField("POLYGON with Points");
+    this.setInputsInline(true);
+    this.setOutput(true, "shape");
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['rectangle'] = {
+  init: function() {
+    this.appendValueInput("point")
+        .setCheck("point")
+        .appendField("RECTANGLE at Point");
+    this.appendValueInput("width")
+        .setCheck("Number")
+        .appendField("Width");
+    this.appendValueInput("height")
+        .setCheck("Number")
+        .appendField("Height");
+    this.setOutput(true, "shape");
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['background'] = {
+  init: function() {
+    this.appendValueInput("color")
+        .setCheck("color")
+        .appendField("set background");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['draw'] = {
   init: function() {
     this.appendValueInput("shape")
