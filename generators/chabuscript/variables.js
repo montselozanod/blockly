@@ -9,31 +9,19 @@
 
  goog.require('Blockly.Chabuscript');
 
- Blockly.Chabuscript['variables_get'] = function() {
-   // Variable getter.
-   var code = Blockly.Chabuscript.variableDB_.getName(this.getFieldValue('VAR'),
-       Blockly.Chabuscript.NAME_TYPE);
-   return [code, Blockly.Chabuscript.ORDER_ATOMIC];
+ Blockly.ChabuScript['var'] = function(block) {
+   var dropdown_type = block.getFieldValue('type');
+   var text_var_id = block.getFieldValue('var_id');
+   // TODO: Assemble ChabuScript into code variable.
+   var code = '...;\n';
+   return code;
  };
 
- Blockly.Chabuscript['variables_declare'] = function() {
-   // Variable setter.
-   var variable_type = this.getFieldValue('TYPE');
-   //checar unicidad de variable en el scope .. si no syntax error
-   
-   //TODO: settype to variable
-   var argument0 = Blockly.Chabuscript.valueToCode(this, 'VALUE',
-       Blockly.Chabuscript.ORDER_ASSIGNMENT) || '0';
-   var varName = Blockly.Chabuscript.variableDB_.getName(this.getFieldValue('VAR'),
-       Blockly.Variables.NAME_TYPE);
-   return '';
- };
-
- Blockly.Chabuscript['variables_set'] = function() {
-   // Variable setter.
-   var argument0 = Blockly.Chabuscript.valueToCode(this, 'VALUE',
-       Blockly.Chabuscript.ORDER_ASSIGNMENT) || '0';
-   var varName = Blockly.Chabuscript.variableDB_.getName(this.getFieldValue('VAR'),
-       Blockly.Variables.NAME_TYPE);
-   return varName + ' = ' + argument0 + ';\n';
+ Blockly.ChabuScript['var_list'] = function(block) {
+   var dropdown_type = block.getFieldValue('type');
+   var text_list_id = block.getFieldValue('list_id');
+   var value_set_list = Blockly.ChabuScript.valueToCode(block, 'set_list', Blockly.ChabuScript.ORDER_ATOMIC);
+   // TODO: Assemble ChabuScript into code variable.
+   var code = '...;\n';
+   return code;
  };
