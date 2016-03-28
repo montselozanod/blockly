@@ -21,3 +21,13 @@ Blockly.JavaScript['main'] = function(block) {
   var code = '...;\n';
   return code;
 };
+
+Blockly.JavaScript['func_params'] = function(block) {
+  var dropdown_param_type = block.getFieldValue('param_type');
+  var text_param_name = block.getFieldValue('param_name');
+  var value_paramname = Blockly.JavaScript.valueToCode(block, 'paramName', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};

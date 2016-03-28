@@ -40,3 +40,16 @@ Blockly.Blocks['main'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['func_params'] = {
+  init: function() {
+    this.appendValueInput("paramName")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["number", "number"], ["boolean", "boolean"], ["string", "string"]]), "param_type")
+        .appendField(new Blockly.FieldTextInput("default"), "param_name");
+    this.setOutput(true, null);
+    this.setColour(300);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
