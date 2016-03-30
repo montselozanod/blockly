@@ -1,3 +1,9 @@
+'use strict';
+
+goog.provide('Blockly.Blocks.logic');
+
+goog.require('Blockly.Blocks');
+
 Blockly.Blocks['logic_if'] = {
   init: function() {
     this.appendValueInput("IF")

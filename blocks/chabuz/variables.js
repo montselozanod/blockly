@@ -1,3 +1,9 @@
+'use strict';
+
+goog.provide('Blockly.Blocks.variables');
+
+goog.require('Blockly.Blocks');
+
 Blockly.Blocks['var'] = {
   init: function() {
     this.appendDummyInput()
