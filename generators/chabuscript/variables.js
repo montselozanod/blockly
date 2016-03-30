@@ -28,7 +28,7 @@
 
  Blockly.ChabuScript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
-   // TODO: Assemble JavaScript into code variable.
+   // TODO: Assemble Chabuscript into code variable.
    var code = '...';
    // TODO: Change ORDER_NONE to the correct strength.
    return [code, Blockly.ChabuScript.ORDER_NONE];

@@ -5,10 +5,10 @@ goog.provide('Blockly.Chabuscript.loops');
 goog.require('Blockly.Chabuscript');
 
 
-Blockly.JavaScript['loop_while'] = function(block) {
-  var value_while_cond = Blockly.JavaScript.valueToCode(block, 'while_cond', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_while_stmts = Blockly.JavaScript.statementToCode(block, 'while_stmts');
-  // TODO: Assemble JavaScript into code variable.
+Blockly.Chabuscript['loop_while'] = function(block) {
+  var value_while_cond = Blockly.Chabuscript.valueToCode(block, 'while_cond', Blockly.Chabuscript.ORDER_ATOMIC);
+  var statements_while_stmts = Blockly.Chabuscript.statementToCode(block, 'while_stmts');
+  // TODO: Assemble Chabuscript into code variable.
   var code = '...;\n';
   return code;
 };

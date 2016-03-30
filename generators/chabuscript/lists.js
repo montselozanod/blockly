@@ -9,18 +9,18 @@
 
  goog.require('Blockly.Chabuscript');
 
- Blockly.Python['lists_create_empty'] = function(block) {
+ Blockly.Chabuscript['lists_create_empty'] = function(block) {
    // Create an empty list.
-   return ['[]', Blockly.Python.ORDER_ATOMIC];
+   return ['[]', Blockly.Chabuscript.ORDER_ATOMIC];
  };
 
- Blockly.Python['lists_create_with'] = function(block) {
+ Blockly.Chabuscript['lists_create_with'] = function(block) {
    // Create a list with any number of elements of any type.
    var code = new Array(block.itemCount_);
    for (var n = 0; n < block.itemCount_; n++) {
-     code[n] = Blockly.Python.valueToCode(block, 'ADD' + n,
-         Blockly.Python.ORDER_NONE) || 'None';
+     code[n] = Blockly.Chabuscript.valueToCode(block, 'ADD' + n,
+         Blockly.Chabuscript.ORDER_NONE) || 'None';
    }
    code = '[' + code.join(', ') + ']';
-   return [code, Blockly.Python.ORDER_ATOMIC];
+   return [code, Blockly.Chabuscript.ORDER_ATOMIC];
  };
