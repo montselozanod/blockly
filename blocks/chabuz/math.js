@@ -35,3 +35,18 @@ Blockly.Blocks['term'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['exp'] = {
+  init: function() {
+    this.appendValueInput("opIzq")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["+", "SUM"], ["-", "MINUS"]]), "op");
+    this.appendValueInput("opDer")
+        .setCheck("Number");
+    this.setOutput(true, "expression");
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
