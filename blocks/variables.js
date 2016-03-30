@@ -15,7 +15,6 @@ Blockly.Blocks['var'] = {
     this.setNextStatement(true, null);
     this.setColour(280);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -28,7 +27,6 @@ Blockly.Blocks['var_list'] = {
         .appendField(new Blockly.FieldTextInput("default"), "list_id");
     this.setColour(280);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -39,6 +37,5 @@ Blockly.Blocks['variables_exist_var'] = {
     this.setOutput(true);
     this.setColour(280);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };

@@ -15,8 +15,8 @@ Blockly.Blocks['print'] = {
     this.setNextStatement(true);
     this.setColour(23);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-}
+  }
+};
 
 Blockly.Blocks['print_ctestring'] = {
   init: function() {
@@ -28,6 +28,5 @@ Blockly.Blocks['print_ctestring'] = {
     this.setNextStatement(true);
     this.setColour(23);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
