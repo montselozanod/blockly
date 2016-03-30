@@ -31,3 +31,14 @@ Blockly.Blocks['var_list'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['variables_exist_var'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("NAME"), "var_name");
+    this.setOutput(true);
+    this.setColour(280);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
