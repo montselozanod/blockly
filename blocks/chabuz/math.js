@@ -50,3 +50,21 @@ Blockly.Blocks['exp'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['random'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("random number");
+    this.appendValueInput("min")
+        .setCheck("Number")
+        .appendField("MIN:");
+    this.appendValueInput("max")
+        .setCheck("Number")
+        .appendField("MAX:");
+    this.setInputsInline(true);
+    this.setOutput(true, "expression");
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
