@@ -10,7 +10,7 @@ Blockly.Chabuscript['color'] = function(block) {
   var value_green = Blockly.Chabuscript.valueToCode(block, 'green', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_blue = Blockly.Chabuscript.valueToCode(block, 'blue', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble Chabuscript into code variable.
-  var code = '...';
+  var code = 'color(' + value_red + ',' + value_green + ',' + value_blue + ')';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
