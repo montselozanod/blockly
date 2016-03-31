@@ -51,6 +51,21 @@ Blockly.Blocks['exp'] = {
   }
 };
 
+Blockly.Blocks['paren'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("(");
+    this.appendValueInput("NAME");
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setOutput(true);
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['random'] = {
   init: function() {
     this.appendDummyInput()
