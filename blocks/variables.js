@@ -18,17 +18,6 @@ Blockly.Blocks['var'] = {
   }
 };
 
-Blockly.Blocks['var_list'] = {
-  init: function() {
-    this.appendValueInput("set_list")
-        .setCheck(["Number", "Boolean", "String"])
-        .appendField("list")
-        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "type")
-        .appendField(new Blockly.FieldTextInput("default"), "list_id");
-    this.setColour(280);
-    this.setTooltip('');
-  }
-};
 
 Blockly.Blocks['variables_exist_var'] = {
   init: function() {

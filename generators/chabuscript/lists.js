@@ -9,6 +9,15 @@
 
  goog.require('Blockly.Chabuscript');
 
+ Blockly.Chabuscript['list_values'] = function(block) {
+   var dropdown_param_type = block.getFieldValue('param_type');
+   var text_listname_name = block.getFieldValue('listName_name');
+   var statements_values = Blockly.JavaScript.statementToCode(block, 'values');
+   // TODO: Assemble JavaScript into code variable.
+   var code = '...;\n';
+   return code;
+ };
+
  Blockly.Chabuscript['lists_create_empty'] = function(block) {
    // Create an empty list.
    return ['[]', Blockly.Chabuscript.ORDER_ATOMIC];
