@@ -29,6 +29,20 @@ Blockly.Blocks['color'] = {
   }
 };
 
+Blockly.Blocks['circle'] = {
+  init: function() {
+    this.appendDummyInput();
+    this.appendValueInput("point")
+        .appendField("CIRCLE at point");
+    this.appendValueInput("radius")
+        .appendField("with radius");
+    this.setInputsInline(true);
+    this.setOutput(true, "shape");
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 Blockly.Blocks['point'] = {
   init: function() {
