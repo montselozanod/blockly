@@ -175,6 +175,7 @@ class Gen_compressed(threading.Thread):
     self.gen_core()
     self.gen_blocks()
     self.gen_generator("chabuscript")
+    self.gen_generator("javascript")
 
   def gen_core(self):
     target_filename = "blockly_compressed.js"
