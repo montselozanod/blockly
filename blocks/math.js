@@ -17,7 +17,6 @@ Blockly.Blocks['assign'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -32,7 +31,6 @@ Blockly.Blocks['term'] = {
     this.setOutput(true, "expression");
     this.setColour(230);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -47,7 +45,6 @@ Blockly.Blocks['exp'] = {
     this.setOutput(true, "expression");
     this.setColour(230);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -62,7 +59,6 @@ Blockly.Blocks['paren'] = {
     this.setOutput(true);
     this.setColour(180);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -80,6 +76,19 @@ Blockly.Blocks['random'] = {
     this.setOutput(true, "expression");
     this.setColour(230);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['paren'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("(");
+    this.appendValueInput("expression");
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setOutput(true);
+    this.setColour(180);
+    this.setTooltip('');
   }
 };

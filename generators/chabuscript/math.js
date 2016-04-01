@@ -42,8 +42,9 @@ Blockly.Chabuscript['random'] = function(block) {
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
-Blockly.Chabuscript['paren'] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+
+Blockly.JavaScript['paren'] = function(block) {
+  var value_expression = Blockly.JavaScript.valueToCode(block, 'expression', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.

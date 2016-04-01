@@ -37,7 +37,6 @@ Blockly.Chabuscript['add_item'] = function(block) {
 Blockly.Chabuscript['remove_item'] = function(block) {
   var text_list_item = block.getFieldValue('list_ITEM');
   var text_index = block.getFieldValue('index');
-  // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   return code;
 };

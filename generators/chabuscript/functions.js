@@ -13,17 +13,12 @@ Blockly.Chabuscript['function'] = function(block) {
   // TODO: Assemble Chabuscript into code variable.
   if(funcIsUnique(text_funcname) && varIsUnique(text_funcname))
   {
-    var proc = {
-      'scope': 'local',
-      'id': 'start',
-      'type': 'void',
-      'params':
-    };
+
     addProc('main', proc);
     var code = '...;\n';
     return code;
   }else{
-    console.log(errors[]
+    console.log(errors[]);
   }
 
 };
