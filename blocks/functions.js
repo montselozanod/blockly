@@ -23,7 +23,6 @@ Blockly.Blocks['function'] = {
         .appendField("return");
     this.setColour(300);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -37,7 +36,6 @@ Blockly.Blocks['main'] = {
         .appendField("end");
     this.setColour(300);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 

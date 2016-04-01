@@ -44,8 +44,6 @@ Blockly.Chabuscript['main'] = function(block) {
 Blockly.JavaScript['func_param'] = function(block) {
   var dropdown_param_type = block.getFieldValue('param_type');
   var text_param_name = block.getFieldValue('param_name');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  var code = dropdown_param_type + ':' +text_param_name;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
