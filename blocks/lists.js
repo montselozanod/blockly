@@ -16,7 +16,6 @@ Blockly.Blocks['list_values'] = {
     this.setNextStatement(true);
     this.setColour(90);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -30,5 +29,35 @@ Blockly.Blocks['list_item'] = {
     this.setNextStatement(true);
     this.setColour(75);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
+};
+
+  Blockly.Blocks['add_item'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("in list")
+          .appendField(new Blockly.FieldTextInput("NAME"), "list_ITEM")
+          .appendField("add item")
+          .appendField(new Blockly.FieldTextInput("ITEM"), "new_Item");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.setColour(90);
+      this.setTooltip('');
+    }
+  };
+
+  Blockly.Blocks['remove_item'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("in list")
+          .appendField(new Blockly.FieldTextInput("NAME"), "list_ITEM")
+          .appendField("remove item at")
+          .appendField(new Blockly.FieldTextInput("INDEX"), "index");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.setColour(90);
+      this.setTooltip('');
+    }
+  };

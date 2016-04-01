@@ -18,18 +18,26 @@
    return code;
  };
 
- Blockly.Chabuscript['lists_create_empty'] = function(block) {
-   // Create an empty list.
-   return ['[]', Blockly.Chabuscript.ORDER_ATOMIC];
- };
+ Blockly.Chabuscript['list_item'] = function(block) {
+  var text_list_item = block.getFieldValue('list_ITEM');
+  // TODO: Assemble JavaScript into code variable.
+  var code = text_list_item +',';
+  return code;
+};
 
- Blockly.Chabuscript['lists_create_with'] = function(block) {
-   // Create a list with any number of elements of any type.
-   var code = new Array(block.itemCount_);
-   for (var n = 0; n < block.itemCount_; n++) {
-     code[n] = Blockly.Chabuscript.valueToCode(block, 'ADD' + n,
-         Blockly.Chabuscript.ORDER_NONE) || 'None';
-   }
-   code = '[' + code.join(', ') + ']';
-   return [code, Blockly.Chabuscript.ORDER_ATOMIC];
- };
+Blockly.Chabuscript['add_item'] = function(block) {
+  var text_list_item = block.getFieldValue('list_ITEM');
+  var text_new_item = block.getFieldValue('new_Item');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+
+Blockly.Chabuscript['remove_item'] = function(block) {
+  var text_list_item = block.getFieldValue('list_ITEM');
+  var text_index = block.getFieldValue('index');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
