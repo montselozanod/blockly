@@ -33,9 +33,7 @@ Blockly.Chabuscript['exp'] = function(block) {
 Blockly.Chabuscript['random'] = function(block) {
   var value_min = Blockly.Chabuscript.valueToCode(block, 'min', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_max = Blockly.Chabuscript.valueToCode(block, 'max', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  var code = 'random number min:' + value_min + ' max:' + value_max;
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
