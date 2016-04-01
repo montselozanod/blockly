@@ -4,41 +4,35 @@ goog.provide('Blockly.Chabuscript.functions');
 
 goog.require('Blockly.Chabuscript');
 
-Blockly.Chabuscript['function'] = function(block) {
-  var text_funcname = block.getFieldValue('funcName');
+
+Blockly.Chabuscript['func_block'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
-  var value_funcskeleton = Blockly.Chabuscript.valueToCode(block, 'funcSkeleton', Blockly.Chabuscript.ORDER_ATOMIC);
+  var text_funcname = block.getFieldValue('funcName');
+  var statements_params = Blockly.Chabuscript.statementToCode(block, 'params');
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
-  var value_rtnvar = Blockly.Chabuscript.valueToCode(block, 'rtnVar', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
-  if(funcIsUnique(text_funcname) && varIsUnique(text_funcname))
-  {
 
-    addProc('main', proc);
-    var code = '...;\n';
-    return code;
-  }else{
-    console.log(errors[]);
-  }
-
+  var code = 'function ' + dropdown_type + ' ' + text_funcname + 'params:(' + statements_params+'){' + statements_stmts + '} end';
+  return code;
 };
 
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
-  // TODO: Assemble Chabuscript into code variable.
-  var proc = {
-    'scope': 'local',
-    'id': 'start',
-    'type': 'void',
-  };
-  addProc('main', proc);
-  var code = '';
+
+  var code = 'start {' + statements_maint_stmts + '} end';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+Blockly.JavaScript['param_block'] = function(block) {
+  var dropdown_param_type = block.getFieldValue('param_type');
+  var text_param_name = block.getFieldValue('param_name');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_param_type + ' ' + text_param_name+ ';';
   return code;
 };
 
-Blockly.JavaScript['func_param'] = function(block) {
-  var dropdown_param_type = block.getFieldValue('param_type');
-  var text_param_name = block.getFieldValue('param_name');
-  var code = dropdown_param_type + ':' +text_param_name;
-  return [code, Blockly.JavaScript.ORDER_NONE];
+Blockly.JavaScript['return_stmt'] = function(block) {
+  var text_value = block.getFieldValue('value');
+  var code = 'return ' + text_value + ';';
+  return code;
 };

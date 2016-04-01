@@ -33,15 +33,15 @@ Blockly.Chabuscript['exp'] = function(block) {
 Blockly.Chabuscript['random'] = function(block) {
   var value_min = Blockly.Chabuscript.valueToCode(block, 'min', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_max = Blockly.Chabuscript.valueToCode(block, 'max', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = 'random number min:' + value_min + ' max:' + value_max;
+  var code = 'random num min:' + value_min + ' max:' + value_max;
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
 
-Blockly.JavaScript['paren'] = function(block) {
-  var value_expression = Blockly.JavaScript.valueToCode(block, 'expression', Blockly.JavaScript.ORDER_ATOMIC);
+Blockly.Chabuscript['paren'] = function(block) {
+  var value_expression = Blockly.Chabuscript.valueToCode(block, 'expression', Blockly.Chabuscript.ORDER_ATOMIC);
 
   var code = '(' + value_expression + ')';
 
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return [code, Blockly.Chabuscript.ORDER_NONE];
 };

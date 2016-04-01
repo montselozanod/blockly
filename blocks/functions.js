@@ -5,22 +5,23 @@ goog.provide('Blockly.Blocks.functions');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks['function'] = {
+Blockly.Blocks['func_block'] = {
   init: function() {
-    this.appendValueInput("funcSkeleton")
-        .setCheck("params")
+    this.appendDummyInput()
         .appendField("function")
-        .appendField(new Blockly.FieldTextInput("default"), "funcName")
-        .appendField("type:")
-        .appendField(new Blockly.FieldDropdown([["void", "void"], ["boolean", "boolean"], ["number", "number"], ["string", "string"]]), "type")
+        .appendField("type")
+        .appendField(new Blockly.FieldDropdown([["void", "void"], ["number", "NUMBER"], ["string", "STRING"], ["bool", "BOOL"]]), "type")
+        .appendField(new Blockly.FieldTextInput("NAME"), "funcName");
+    this.appendStatementInput("params")
         .appendField("params:");
     this.appendStatementInput("stmts")
-        .setCheck(null)
         .appendField("do");
-    this.appendValueInput("rtnVar")
-        .setCheck(null)
+    this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("return");
+        .appendField("end");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(300);
     this.setTooltip('');
   }
@@ -39,14 +40,30 @@ Blockly.Blocks['main'] = {
   }
 };
 
-Blockly.Blocks['func_param'] = {
+Blockly.Blocks['param_block'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["number", "NUMBER"], ["string", "STRING"], ["bool", "BOOL"]]), "param_type")
         .appendField(new Blockly.FieldTextInput("NAME"), "param_name");
     this.setInputsInline(true);
-    this.setOutput(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setColour(300);
     this.setTooltip('');
+  }
+};
+
+
+Blockly.Blocks['return_stmt'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("return")
+        .appendField(new Blockly.FieldTextInput("VALUE"), "value");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(300);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };
