@@ -44,9 +44,9 @@ Blockly.Chabuscript['polygon'] = function(block) {
 };
 
 
-Blockly.JavaScript['circle'] = function(block) {
-  var value_point = Blockly.JavaScript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
-  var value_radius = Blockly.JavaScript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
+Blockly.Chabuscript['circle'] = function(block) {
+  var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   var code = 'circle at: ' + value_point + ' r:' + value_radius;
   // TODO: Change ORDER_NONE to the correct strength.
