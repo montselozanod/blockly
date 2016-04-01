@@ -74,7 +74,7 @@ Blockly.Blocks['paren'] = {
         .appendField(")");
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setColour(180);
+    this.setColour(230);
     this.setTooltip('');
   }
 };
