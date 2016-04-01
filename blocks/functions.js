@@ -41,15 +41,14 @@ Blockly.Blocks['main'] = {
   }
 };
 
-Blockly.Blocks['func_params'] = {
+Blockly.Blocks['func_param'] = {
   init: function() {
-    this.appendValueInput("paramName")
-        .setCheck(null)
-        .appendField(new Blockly.FieldDropdown([["number", "number"], ["boolean", "boolean"], ["string", "string"]]), "param_type")
-        .appendField(new Blockly.FieldTextInput("default"), "param_name");
-    this.setOutput(true, null);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["number", "NUMBER"], ["string", "STRING"], ["bool", "BOOL"]]), "param_type")
+        .appendField(new Blockly.FieldTextInput("NAME"), "param_name");
+    this.setInputsInline(true);
+    this.setOutput(true);
     this.setColour(300);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };

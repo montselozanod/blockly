@@ -11,23 +11,41 @@ Blockly.Chabuscript['function'] = function(block) {
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
   var value_rtnvar = Blockly.Chabuscript.valueToCode(block, 'rtnVar', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble Chabuscript into code variable.
-  var code = '...;\n';
-  return code;
+  if(funcIsUnique(text_funcname) && varIsUnique(text_funcname))
+  {
+    var proc = {
+      'scope': 'local',
+      'id': 'start',
+      'type': 'void',
+      'params':
+    };
+    addProc('main', proc);
+    var code = '...;\n';
+    return code;
+  }else{
+    console.log(errors[]
+  }
+
 };
 
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   // TODO: Assemble Chabuscript into code variable.
-  var code = '...;\n';
+  var proc = {
+    'scope': 'local',
+    'id': 'start',
+    'type': 'void',
+  };
+  addProc('main', proc);
+  var code = '';
   return code;
 };
 
-Blockly.Chabuscript['func_params'] = function(block) {
+Blockly.JavaScript['func_param'] = function(block) {
   var dropdown_param_type = block.getFieldValue('param_type');
   var text_param_name = block.getFieldValue('param_name');
-  var value_paramname = Blockly.Chabuscript.valueToCode(block, 'paramName', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
+  // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.Chabuscript.ORDER_NONE];
+  return [code, Blockly.JavaScript.ORDER_NONE];
 };
