@@ -18,7 +18,7 @@ Blockly.Chabuscript['draw'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble Chabuscript into code variable.
-  var code = 'draw shape ' + value_shape + ' ' + value_color + ' point-width:' + value_point_width +';';
+  var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
   return code;
 };
 
@@ -33,7 +33,7 @@ Blockly.Chabuscript['point'] = function(block) {
 Blockly.Chabuscript['line'] = function(block) {
   var value_point1 = Blockly.Chabuscript.valueToCode(block, 'point1', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point2 = Blockly.Chabuscript.valueToCode(block, 'point2', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = 'line from ' + value_point1 + ' to ' + value_point2;
+  var code = 'line p1:' + value_point1 + ' p2: ' + value_point2;
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
@@ -64,7 +64,6 @@ Blockly.Chabuscript['rectangle'] = function(block) {
 
 Blockly.Chabuscript['background'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
   var code = 'background ' + value_color;
   return code;
 };
