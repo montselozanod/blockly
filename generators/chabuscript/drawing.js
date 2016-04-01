@@ -44,15 +44,14 @@ Blockly.Chabuscript['polygon'] = function(block) {
 };
 
 
-Blockly.Chabuscript['circle'] = function(block) {
-  var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
-  var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
-  var code = 'circle at: ' + value_name + ' r:' + value_radius;
+Blockly.JavaScript['circle'] = function(block) {
+  var value_point = Blockly.JavaScript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_radius = Blockly.JavaScript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'circle at: ' + value_point + ' r:' + value_radius;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
-
 
 Blockly.Chabuscript['rectangle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
