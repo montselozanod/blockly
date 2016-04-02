@@ -9,7 +9,7 @@ Blockly.Blocks['logic_if'] = {
     this.appendValueInput("IF")
         .setCheck("Boolean")
         .appendField("if");
-    this.appendStatementInput("DO")
+    this.appendStatementInput("IF_DO")
         .setCheck(null)
         .appendField("do");
     this.setInputsInline(false);
@@ -26,10 +26,10 @@ Blockly.Blocks['logic_if_else'] = {
     this.appendValueInput("IF")
         .setCheck("Boolean")
         .appendField("if");
-    this.appendStatementInput("DO")
+    this.appendStatementInput("IF_DO")
         .setCheck(null)
         .appendField("do");
-    this.appendStatementInput("ELSE")
+    this.appendStatementInput("ELSE_DO")
         .setCheck(null)
         .appendField("else");
     this.setInputsInline(false);
@@ -46,16 +46,16 @@ Blockly.Blocks['logic_if_elsif_else'] = {
     this.appendValueInput("IF")
         .setCheck("Boolean")
         .appendField("if");
-    this.appendStatementInput("DO")
+    this.appendStatementInput("IF_DO")
         .setCheck(null)
         .appendField("do");
     this.appendValueInput("ELSIF")
         .setCheck("Boolean")
         .appendField("elsif");
-    this.appendStatementInput("NAME")
+    this.appendStatementInput("ELSIF_DO")
         .setCheck(null)
         .appendField("do");
-    this.appendStatementInput("ELSE")
+    this.appendStatementInput("ELSE_DO")
         .setCheck(null)
         .appendField("else");
     this.setInputsInline(false);
