@@ -23,9 +23,7 @@ Blockly.Chabuscript['exp'] = function(block) {
   var value_opizq = Blockly.Chabuscript.valueToCode(block, 'opIzq', Blockly.Chabuscript.ORDER_ATOMIC);
   var dropdown_op = block.getFieldValue('op');
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
-
   var code = value_opizq + ' '+ dropdown_op + ' '+value_opder;
-
   return [code, Blockly.Chabuscript.ORDER_ADDITION];
 };
 
@@ -40,8 +38,6 @@ Blockly.Chabuscript['random'] = function(block) {
 
 Blockly.Chabuscript['paren'] = function(block) {
   var value_expression = Blockly.Chabuscript.valueToCode(block, 'expression', Blockly.Chabuscript.ORDER_ATOMIC);
-
   var code = '(' + value_expression + ')';
-
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };

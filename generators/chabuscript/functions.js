@@ -10,14 +10,12 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var text_funcname = block.getFieldValue('funcName');
   var statements_params = Blockly.Chabuscript.statementToCode(block, 'params');
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
-
   var code = 'function ' + dropdown_type + ' ' + text_funcname + 'params:(' + statements_params+'){' + statements_stmts + '} end';
   return code;
 };
 
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
-
   var code = 'start {' + statements_maint_stmts + '} end';
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
@@ -26,7 +24,6 @@ Blockly.Chabuscript['main'] = function(block) {
 Blockly.Chabuscript['param_block'] = function(block) {
   var dropdown_param_type = block.getFieldValue('param_type');
   var text_param_name = block.getFieldValue('param_name');
-  // TODO: Assemble Chabuscript into code variable.
   var code = dropdown_param_type + ' ' + text_param_name+ ';';
   return code;
 };

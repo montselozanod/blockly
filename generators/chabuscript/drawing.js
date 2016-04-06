@@ -17,7 +17,6 @@ Blockly.Chabuscript['draw'] = function(block) {
   var value_shape = Blockly.Chabuscript.valueToCode(block, 'shape', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
   return code;
 };
@@ -47,7 +46,6 @@ Blockly.Chabuscript['polygon'] = function(block) {
 Blockly.Chabuscript['circle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
-  // TODO: Assemble Chabuscript into code variable.
   var code = 'circle at: ' + value_point + ' r:' + value_radius;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Chabuscript.ORDER_NONE];
