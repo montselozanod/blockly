@@ -34,19 +34,24 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['invokefuncreturn'] = function(block) {
+Blockly.Chabuscript['invokefuncreturn'] = function(block) {
   var text_func_name = block.getFieldValue('func_name');
-  var value_params = Blockly.JavaScript.valueToCode(block, 'params', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
 };
 
-Blockly.JavaScript['invokevoidfunc'] = function(block) {
+Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   var text_func_id = block.getFieldValue('func_id');
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   return code;
+};
+
+Blockly.Chabuscript['func_param'] = function(block) {
+  var text_param = block.getFieldValue('param');
+  return text_param;
 };
