@@ -33,3 +33,12 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
   var code = 'return ' + text_value + ';';
   return code;
 };
+
+Blockly.JavaScript['invokefuncreturn'] = function(block) {
+  var text_func_name = block.getFieldValue('func_name');
+  var value_params = Blockly.JavaScript.valueToCode(block, 'params', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};

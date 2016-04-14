@@ -20,8 +20,6 @@ Blockly.Blocks['func_block'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("end");
     this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
     this.setColour(300);
     this.setTooltip('');
   }
@@ -48,7 +46,7 @@ Blockly.Blocks['param_block'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(300);
+    this.setColour(315);
     this.setTooltip('');
   }
 };
@@ -64,6 +62,5 @@ Blockly.Blocks['return_stmt'] = {
     this.setNextStatement(true);
     this.setColour(300);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
