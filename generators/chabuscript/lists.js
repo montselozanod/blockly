@@ -28,7 +28,7 @@ Blockly.Chabuscript['add_item'] = function(block) {
   var text_list_item = block.getFieldValue('list_ITEM');
   var text_new_item = block.getFieldValue('new_Item');
   // REVIEW: con gramatica
-  var code = 'list' + text_list_item + 'add' + text_new_item;
+  var code = 'list' + text_list_item + 'add' + text_new_item + ';';
   return code;
 };
 
@@ -37,6 +37,6 @@ Blockly.Chabuscript['remove_item'] = function(block) {
   var text_list_item = block.getFieldValue('list_ITEM');
   var text_index = block.getFieldValue('index');
   // REVIEW: con gramatica
-  var code = 'list' + text_list_item + 'remove' + text_index;
+  var code = 'list' + text_list_item + 'remove' + text_index + ';';
   return code;
 };

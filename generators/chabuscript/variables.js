@@ -12,18 +12,27 @@
  Blockly.Chabuscript['var'] = function(block) {
    var dropdown_type = block.getFieldValue('type');
    var text_var_id = block.getFieldValue('var_id');
-   // TODO: checar esto
    if(varIsUnique(text_var_id))
    {
-
-   }else{}
-   var code = '...;\n';
-   return code;
+     var code = dropdown_type +" " +text_var_id;
+     return code;
+   }else{
+     var message = errors['DUPLICATE_VARIABLE_NAME'];
+     printToShell(message, true);
+   }
  };
 
 
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
    var code = text_var_name;
-   return [code, Blockly.Chabuscript.ORDER_NONE];
+   //check that variable exists
+   if(varExists(code))
+   {
+     return code;
+   }else{
+     var message = errors['UNDECLARED_VARIABLE'];
+     printToShell(message, true);
+   }
+
  };

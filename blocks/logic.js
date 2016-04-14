@@ -51,7 +51,7 @@ Blockly.Blocks['logic_if_elsif_else'] = {
         .appendField("do");
     this.appendValueInput("ELSIF")
         .setCheck("Boolean")
-        .appendField("elsif");
+        .appendField("else if");
     this.appendStatementInput("ELSIF_DO")
         .setCheck(null)
         .appendField("do");

@@ -17,7 +17,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
-  return [code, Blockly.Chabuscript.ORDER_NONE];
+  return code;
 };
 
 
