@@ -19,12 +19,12 @@ Blockly.Chabuscript['logic_if_else'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['logic_if_elsif_else'] = function(block) {
-  var value_if = Blockly.JavaScript.valueToCode(block, 'IF', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_if_do = Blockly.JavaScript.statementToCode(block, 'IF_DO');
-  var value_elsif = Blockly.JavaScript.valueToCode(block, 'ELSIF', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_elsif_do = Blockly.JavaScript.statementToCode(block, 'ELSIF_DO');
-  var statements_else_do = Blockly.JavaScript.statementToCode(block, 'ELSE_DO');
+Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
+  var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
+  var statements_if_do = Blockly.Chabuscript.statementToCode(block, 'IF_DO');
+  var value_elsif = Blockly.Chabuscript.valueToCode(block, 'ELSIF', Blockly.Chabuscript.ORDER_ATOMIC);
+  var statements_elsif_do = Blockly.Chabuscript.statementToCode(block, 'ELSIF_DO');
+  var statements_else_do = Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
   var code = 'if' + value_if + statements_if_do + 'elif' + value_elsif + statements_elsif_do + 'else' + statements_else_do + 'end;';
   return code;
 };
