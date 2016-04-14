@@ -64,3 +64,39 @@ Blockly.Blocks['return_stmt'] = {
     this.setTooltip('');
   }
 };
+
+Blockly.Blocks['invokefuncreturn'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("function name"), "func_name")
+        .appendField("(");
+    this.appendValueInput("params")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(300);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['invokevoidfunc'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("call")
+        .appendField(new Blockly.FieldTextInput("function name"), "func_id");
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("(");
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(300);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
