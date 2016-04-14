@@ -17,7 +17,6 @@ Blockly.Blocks['logic_if'] = {
     this.setNextStatement(true, null);
     this.setColour(210);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -37,7 +36,6 @@ Blockly.Blocks['logic_if_else'] = {
     this.setNextStatement(true, null);
     this.setColour(210);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -63,7 +61,6 @@ Blockly.Blocks['logic_if_elsif_else'] = {
     this.setNextStatement(true, null);
     this.setColour(210);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -78,7 +75,6 @@ Blockly.Blocks['boolean_compare_expression'] = {
     this.setOutput(true, "Boolean");
     this.setColour(210);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -89,6 +85,5 @@ Blockly.Blocks['boolean_expression'] = {
     this.setOutput(true, "Boolean");
     this.setColour(210);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
