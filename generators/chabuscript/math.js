@@ -7,16 +7,45 @@ goog.require('Blockly.Chabuscript');
 Blockly.Chabuscript['assign'] = function(block) {
   var value_opizq = Blockly.Chabuscript.valueToCode(block, 'opIzq', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = value_opizq + '='+value_opder+';';
-  return code;
+  var code = value_opizq + '=' + value_opder + ';';
+
+  var quad, op, arg1, arg2, result;
+
+  op = Operation.ASSIGN;
+  arg1 = tmpNumMem++;
+  arg2 = null;
+  result = numMem++;
+
+  quad = [op, arg1, arg2, result];
+  quadruples.push(quad)
+
+  //return code;
+  return quad;
 };
 
 Blockly.Chabuscript['term'] = function(block) {
   var value_opizq = Blockly.Chabuscript.valueToCode(block, 'opIzq', Blockly.Chabuscript.ORDER_ATOMIC);
   var dropdown_op = block.getFieldValue('op');
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = value_opizq + ' '+ dropdown_op + ' '+value_opder;
-  return [code, Blockly.Chabuscript.ORDER_MULTIPLICATION];
+  var code = value_opizq + ' ' + dropdown_op + ' ' + value_opder;
+
+  var quad, op, arg1, arg2, result;
+
+  if (dropdown_op == "MULT") {
+    op = Operation.MULT;
+  }
+  else {
+    op = Operation.DIV;
+  }
+
+  arg1 = numMem++;
+  arg2 = numMem++;
+  result = tmpNumMem++;
+
+  quad = [op, arg1, arg2, result];
+  quadruples.push(quad);
+
+  return [quad, Blockly.Chabuscript.ORDER_MULTIPLICATION];
 };
 
 Blockly.Chabuscript['exp'] = function(block) {
@@ -24,7 +53,24 @@ Blockly.Chabuscript['exp'] = function(block) {
   var dropdown_op = block.getFieldValue('op');
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_opizq + ' '+ dropdown_op + ' '+value_opder;
-  return [code, Blockly.Chabuscript.ORDER_ADDITION];
+
+  var quad, op, arg1, arg2, result;
+
+  if (dropdown_op == "SUM") {
+    op = Operation.SUM;
+  }
+  else {
+    op = Operation.MINUS;
+  }
+
+  arg1 = numMem++;
+  arg2 = numMem++;
+  result = tmpNumMem++;
+
+  quad = [op, arg1, arg2, result];
+  quadruples.push(quad);
+
+  return [quad, Blockly.Chabuscript.ORDER_ADDITION];
 };
 
 
