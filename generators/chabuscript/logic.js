@@ -35,7 +35,25 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   var value_right = Blockly.Chabuscript.valueToCode(block, 'right', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_left + dropdown_compare + value_right;
 
-  return code;
+  var quad, op, arg1, arg2, result;
+
+  if (dropdown_compare == "equals") {
+    op = Operation.EQL
+  } else if (dropdown_compare == "less") {
+    op = Operation.LESS
+  } else if (dropdown_compare == "greater") {
+    op = Operation.GRT
+  } else {
+    op = Operation.DIFF
+  }
+
+  arg1 = boolMem++;
+  arg2 = boolMem++;
+  result = tmpBoolMem++;
+
+  quadruples.push([op, arg1, arg2, result]);
+
+  return quadruples.length-1; // return the quadruple index
 };
 
 Blockly.Chabuscript['boolean_expression'] = function(block) {

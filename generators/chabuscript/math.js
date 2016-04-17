@@ -9,18 +9,16 @@ Blockly.Chabuscript['assign'] = function(block) {
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_opizq + '=' + value_opder + ';';
 
-  var quad, op, arg1, arg2, result;
+  var op, arg1, arg2, result;
 
   op = Operation.ASSIGN;
   arg1 = tmpNumMem++;
   arg2 = null;
   result = numMem++;
 
-  quad = [op, arg1, arg2, result];
-  quadruples.push(quad)
+  quadruples.push([op, arg1, arg2, result]);
 
-  //return code;
-  return quad;
+  return quadruples.length-1;
 };
 
 Blockly.Chabuscript['term'] = function(block) {
@@ -29,7 +27,7 @@ Blockly.Chabuscript['term'] = function(block) {
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_opizq + ' ' + dropdown_op + ' ' + value_opder;
 
-  var quad, op, arg1, arg2, result;
+  var op, arg1, arg2, result;
 
   if (dropdown_op == "MULT") {
     op = Operation.MULT;
@@ -42,10 +40,9 @@ Blockly.Chabuscript['term'] = function(block) {
   arg2 = numMem++;
   result = tmpNumMem++;
 
-  quad = [op, arg1, arg2, result];
-  quadruples.push(quad);
+  quadruples.push([op, arg1, arg2, result]);
 
-  return [quad, Blockly.Chabuscript.ORDER_MULTIPLICATION];
+  return [quadruples.length-1, Blockly.Chabuscript.ORDER_MULTIPLICATION];
 };
 
 Blockly.Chabuscript['exp'] = function(block) {
@@ -54,7 +51,7 @@ Blockly.Chabuscript['exp'] = function(block) {
   var value_opder = Blockly.Chabuscript.valueToCode(block, 'opDer', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_opizq + ' '+ dropdown_op + ' '+value_opder;
 
-  var quad, op, arg1, arg2, result;
+  var op, arg1, arg2, result;
 
   if (dropdown_op == "SUM") {
     op = Operation.SUM;
@@ -67,10 +64,9 @@ Blockly.Chabuscript['exp'] = function(block) {
   arg2 = numMem++;
   result = tmpNumMem++;
 
-  quad = [op, arg1, arg2, result];
-  quadruples.push(quad);
+  quadruples.push([op, arg1, arg2, result]);
 
-  return [quad, Blockly.Chabuscript.ORDER_ADDITION];
+  return [quadruples.length-1, Blockly.Chabuscript.ORDER_ADDITION];
 };
 
 

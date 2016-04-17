@@ -15,9 +15,9 @@
    if(varIsUnique(text_var_id) && funcIsUnique(text_var_id))
    {
      addLocalVar(text_var_id, dropdown_type);
-     var code = dropdown_type +" " +text_var_id;
+     var code = dropdown_type + " " + text_var_id;
      return code;
-   }else{
+   } else {
      var message = errors['DUPLICATE_VARIABLE_NAME'];
      printToShell(message, true);
    }

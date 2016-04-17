@@ -7,12 +7,32 @@ goog.require('Blockly.Chabuscript');
 Blockly.Chabuscript['print'] = function(block) {
   var value_print_stmt = Blockly.Chabuscript.valueToCode(block, 'print-stmt', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'print' + value_print_stmt + ';';
-  return code;
+
+  var op, arg1, arg2, result;
+
+  op = Operation.PRINT;
+  arg1 = null;
+  arg2 = null;
+  result = stringMem++;
+
+  quadruples.push([op, arg1, arg2, result]);
+
+  return quadruples.length-1;
 };
 
 
 Blockly.Chabuscript['print_ctestring'] = function(block) {
   var text_print_txt = block.getFieldValue('print_txt');
-  var code = 'print' + text_print_txt+ ';';
-  return code;
+  var code = 'print' + text_print_txt + ';';
+
+  var op, arg1, arg2, result;
+
+  op = Operation.PRINT;
+  arg1 = null;
+  arg2 = null;
+  result = stringMem++;
+
+  quadruples.push([op, arg1, arg2, result]);
+
+  return quadruples.length-1;
 };
