@@ -11,6 +11,14 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var statements_params = Blockly.Chabuscript.statementToCode(block, 'params');
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
   var code = 'function ' + dropdown_type + ' ' + text_funcname + 'params:(' + statements_params+'){' + statements_stmts + '} end';
+
+  if(funcIsUnique(text_funcname))
+  {
+
+  }else{
+    var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
+    printToShell(message, true); // we are printing an error
+  }
   return code;
 };
 
