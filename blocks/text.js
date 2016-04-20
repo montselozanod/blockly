@@ -21,8 +21,9 @@ Blockly.Blocks['print'] = {
 Blockly.Blocks['print_ctestring'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("print")
+        .appendField('print"')
         .appendField(new Blockly.FieldTextInput("default"), "print_txt");
+        .appendField('"')
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

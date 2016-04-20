@@ -13,9 +13,8 @@ Blockly.Chabuscript['print'] = function(block) {
   op = Operation.PRINT;
   arg1 = null;
   arg2 = null;
-  result = stringMem++;
-
-  quadruples.push([op, arg1, arg2, result]);
+  // the value to code should return the address number of what to print
+  quadruples.push([op, arg1, arg2, value_print_stmt]);
 
   return quadruples.length-1;
 };
