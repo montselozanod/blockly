@@ -16,24 +16,28 @@
    if(varIsUnique(text_var_id) && funcIsUnique(text_var_id))
    {
      var address;
+     var type;
      switch(dropdown_type)
      {
        case "number":
         address = numberMem++;
+        type = Type.NUMBER;
         break;
        case "string":
         address = stringMem++;
+        type = Type.STRING;
         break;
        case "boolean":
         address = boolMem++;
+        type = Type.BOOL;
         break
 
      }
-     addLocalVar(text_var_id, dropdown_type, address);
+     addLocalVar(text_var_id, type, address);
      var code = dropdown_type + " " + text_var_id;
      return code;
    } else {
-     var message = errors['DUPLICATE_VARIABLE_NAME'];
+     var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_var_id);
      printToShell(message, true);
    }
  };
@@ -41,13 +45,13 @@
 
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
-   var code = text_var_name;
    //check that variable exists
-   if(varExists(code))
+   if(varExists(text_var_name))
    {
-     return code;
+     var address = varTable[text_var_name][1];
+     return address;
    }else{
-     var message = errors['UNDECLARED_VARIABLE'];
+     var message = String.format(errors['UNDECLARED_VARIABLE'], text_var_name);
      printToShell(message, true);
    }
 
