@@ -27,6 +27,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
       break;
     }
     //addProc(text_funcname, type, co)
+    quadruples.push([Operation.RET, null, null, null]); // regresar control a la funcion que invoco
   }else{
     var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
     printToShell(message, true); // we are printing an error
@@ -38,6 +39,7 @@ Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
 
+  quadruples.push([Operation.END, null, null, null]);
   return code;
 };
 
@@ -50,7 +52,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
   {
     var address;
     var type;
-    switch(dropdown_type)
+    switch(dropdown_param_type)
     {
       case "number":
        address = numberMem++;
@@ -78,7 +80,7 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
   var text_value = block.getFieldValue('value');
   var code = 'return ' + text_value + ';';
 
-  op = Operation.RTRN;
+  var op = Operation.RTRN;
   result = tmpNumMem++; //TODO el result del return
   arg1 = null;
   arg2 = null;
@@ -89,22 +91,32 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
 
 Blockly.Chabuscript['invokefuncreturn'] = function(block) {
   var text_func_name = block.getFieldValue('func_name');
-  var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
   // TODO: Assemble JavaScript into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
+  paramNumber = 0; //regresar valor a cero otra vez
   return code;
 };
 
 Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   var text_func_id = block.getFieldValue('func_id');
-  var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+
+  var op = Opeation.ERA;
+  quadruples.push([op, text_func_id]);
+  paramNumber = 0; //regresar valor a cero otra vez porque funcion ha terminado
   return code;
 };
 
 Blockly.Chabuscript['func_param'] = function(block) {
   var text_param = block.getFieldValue('param');
+
+  var op = Operation.PARAM;
+  var address;      //TODO Check address of textparam...is it a constant or a variable (regex)
+  var pNumber = ++paramNumber;
+  quadruples.push([op, address, , pNumber]);
   return text_param;
 };
