@@ -96,14 +96,18 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
 
 Blockly.Chabuscript['invokefuncreturn'] = function(block) {
   var text_func_name = block.getFieldValue('func_name');
-  var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
-
   if(funcIsUnique(text_func_name))
   {
     var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_name);
     printToShell(message, true);
   }else{
+    var op = Operation.ERA;
+    quadruples.push([op, text_func_name, null, null]);
 
+    var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+
+    var dirInicio = dirProcs[text_func_name][1];
+    quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
   }
 
   paramNumber = 0; //regresar valor a cero otra vez
@@ -112,7 +116,6 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
 
 Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   var text_func_id = block.getFieldValue('func_id');
-  var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
 
   if(funcIsUnique(text_func_name))
   {
@@ -121,6 +124,10 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   }else{
     var op = Opeation.ERA;
     quadruples.push([op, text_func_id]);
+
+    var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+    var dirInicio = dirProcs[text_func_id][1];
+    quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
   }
 
   paramNumber = 0; //regresar valor a cero otra vez porque funcion ha terminado
