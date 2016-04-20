@@ -6,6 +6,7 @@ goog.require('Blockly.Chabuscript');
 
 
 Blockly.Chabuscript['func_block'] = function(block) {
+  var startQuad = quadruples.length;
   var dropdown_type = block.getFieldValue('type');
   var text_funcname = block.getFieldValue('funcName');
   var statements_params = Blockly.Chabuscript.statementToCode(block, 'params');
@@ -26,7 +27,8 @@ Blockly.Chabuscript['func_block'] = function(block) {
       case 'string': type = Type.STRING;
       break;
     }
-    //addProc(text_funcname, type, co)
+    addProc(text_funcname, type, startQuad, [], 0 /* TODO NumVars del main*/ );
+
     quadruples.push([Operation.RET, null, null, null]); // regresar control a la funcion que invoco
   }else{
     var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
@@ -38,6 +40,9 @@ Blockly.Chabuscript['func_block'] = function(block) {
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
+
+  var startQuad = quadruples.length; // num de cuadruplo donde empieza su codigo
+  addProc('start', Type.MAIN, startQuad, [], 0 /* TODO NumVars del main*/ );
 
   quadruples.push([Operation.END, null, null, null]);
   return code;
