@@ -8,7 +8,7 @@ Blockly.Blocks['var'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("set")
-        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["bool", "bool"]]), "type")
+        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "type")
         .appendField(new Blockly.FieldTextInput("default"), "var_id");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);

@@ -12,9 +12,24 @@
  Blockly.Chabuscript['var'] = function(block) {
    var dropdown_type = block.getFieldValue('type');
    var text_var_id = block.getFieldValue('var_id');
+
    if(varIsUnique(text_var_id) && funcIsUnique(text_var_id))
    {
-     addLocalVar(text_var_id, dropdown_type);
+     var address;
+     switch(dropdown_type)
+     {
+       case "number":
+        address = numberMem++;
+        break;
+       case "string":
+        address = stringMem++;
+        break;
+       case "boolean":
+        address = boolMem++;
+        break
+
+     }
+     addLocalVar(text_var_id, dropdown_type, address);
      var code = dropdown_type + " " + text_var_id;
      return code;
    } else {
