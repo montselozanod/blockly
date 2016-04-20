@@ -46,7 +46,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
   var dropdown_param_type = block.getFieldValue('param_type');
   var text_param_name = block.getFieldValue('param_name');
   var code = dropdown_param_type + ' ' + text_param_name+ ';';
-  if(varIsUnique(text_var_id) && funcIsUnique(text_var_id))
+  if(varIsUnique(text_param_name) && funcIsUnique(text_param_name))
   {
     var address;
     var type;
