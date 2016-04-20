@@ -29,9 +29,9 @@ Blockly.Chabuscript['print_ctestring'] = function(block) {
   op = Operation.PRINT;
   arg1 = null;
   arg2 = null;
-  result = stringMem++;
-
-  quadruples.push([op, arg1, arg2, result]);
+  address = constMem++;
+  constants[address] = text_print_txt;
+  quadruples.push([op, arg1, arg2, address]);
 
   return quadruples.length-1;
 };
