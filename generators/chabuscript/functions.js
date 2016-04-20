@@ -124,8 +124,8 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   }else{
     var op = Opeation.ERA;
     quadruples.push([op, text_func_id]);
-
-    var value_name = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+    //transformar params
+    var params = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
     var dirInicio = dirProcs[text_func_id][1];
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
   }
