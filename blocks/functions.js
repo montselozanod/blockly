@@ -41,7 +41,7 @@ Blockly.Blocks['main'] = {
 Blockly.Blocks['param_block'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["number", "NUMBER"], ["string", "STRING"], ["bool", "BOOL"]]), "param_type")
+        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "param_type")
         .appendField(new Blockly.FieldTextInput("NAME"), "param_name");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
