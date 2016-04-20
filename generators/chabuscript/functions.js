@@ -14,7 +14,19 @@ Blockly.Chabuscript['func_block'] = function(block) {
 
   if(funcIsUnique(text_funcname))
   {
-
+    var type;
+    switch(dropdown_type)
+    {
+      case 'void': type = Type.VOID;
+        break;
+      case 'number': type = Type.NUMBER;
+        break;
+      case 'boolean': type = Type.BOOL;
+        break;
+      case 'string': type = Type.STRING;
+      break;
+    }
+    //addProc(text_funcname, type, co)
   }else{
     var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
     printToShell(message, true); // we are printing an error
@@ -25,6 +37,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
 Blockly.Chabuscript['main'] = function(block) {
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
+
   return code;
 };
 
@@ -33,12 +46,44 @@ Blockly.Chabuscript['param_block'] = function(block) {
   var dropdown_param_type = block.getFieldValue('param_type');
   var text_param_name = block.getFieldValue('param_name');
   var code = dropdown_param_type + ' ' + text_param_name+ ';';
-  return code;
+  if(varIsUnique(text_var_id) && funcIsUnique(text_var_id))
+  {
+    var address;
+    var type;
+    switch(dropdown_type)
+    {
+      case "number":
+       address = numberMem++;
+       type = Type.NUMBER;
+       break;
+      case "string":
+       address = stringMem++;
+       type = Type.STRING;
+       break;
+      case "boolean":
+       address = boolMem++;
+       type = Type.BOOL;
+       break
+
+    }
+    addLocalVar(text_param_name, type, address);
+    return type;
+  } else {
+    var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_param_name);
+    printToShell(message, true);
+  }
 };
 
 Blockly.Chabuscript['return_stmt'] = function(block) {
   var text_value = block.getFieldValue('value');
   var code = 'return ' + text_value + ';';
+
+  op = Operation.RTRN;
+  result = tmpNumMem++; //TODO el result del return
+  arg1 = null;
+  arg2 = null;
+
+  quadruples.push([op, result, arg1, arg2]);
   return code;
 };
 

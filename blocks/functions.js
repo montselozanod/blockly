@@ -10,7 +10,7 @@ Blockly.Blocks['func_block'] = {
     this.appendDummyInput()
         .appendField("function")
         .appendField("type")
-        .appendField(new Blockly.FieldDropdown([["void", "void"], ["number", "number"], ["string", "string"], ["bool", "bool"]]), "type")
+        .appendField(new Blockly.FieldDropdown([["void", "void"], ["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "type")
         .appendField(new Blockly.FieldTextInput("NAME"), "funcName");
     this.appendStatementInput("params")
         .appendField("params:");
