@@ -27,9 +27,10 @@ Blockly.Chabuscript['func_block'] = function(block) {
       case 'string': type = Type.STRING;
       break;
     }
-    addProc(text_funcname, type, startQuad, [], 0 /* TODO NumVars del main*/ );
+    addProc(text_funcname, type, startQuad, params, 0 /* TODO NumVars del main*/ );
 
     quadruples.push([Operation.RET, null, null, null]); // regresar control a la funcion que invoco
+    params = []; // eliminate params for next func
   }else{
     var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
     printToShell(message, true); // we are printing an error
@@ -74,7 +75,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
 
     }
     addLocalVar(text_param_name, type, address);
-    return [type,  Blockly.Chabuscript.ORDER_NONE];
+    params.push(type);
   } else {
     var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_param_name);
     printToShell(message, true);
