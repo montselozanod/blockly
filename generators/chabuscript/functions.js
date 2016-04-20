@@ -74,7 +74,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
 
     }
     addLocalVar(text_param_name, type, address);
-    return type;
+    return [type,  Blockly.Chabuscript.ORDER_NONE];
   } else {
     var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_param_name);
     printToShell(message, true);
