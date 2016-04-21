@@ -10,6 +10,7 @@ Blockly.Chabuscript['color'] = function(block) {
   var value_green = Blockly.Chabuscript.valueToCode(block, 'green', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_blue = Blockly.Chabuscript.valueToCode(block, 'blue', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'color(' + value_red + ',' + value_green + ',' + value_blue + ')';
+  quadruples.push([Operation.COLOR, parseInt(value_red), parseInt(value_green), parseInt(value_blue)]);
   return code;
 };
 
