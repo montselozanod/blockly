@@ -10,7 +10,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var startQuad = quadruples.length;
   var dropdown_type = block.getFieldValue('type');
   var text_funcname = block.getFieldValue('funcName');
-  var statements_params = Blockly.Chabuscript.statementToCode(block, 'params');
+  Blockly.Chabuscript.statementToCode(block, 'params');
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
   var code = 'function ' + dropdown_type + ' ' + text_funcname + 'params:(' + statements_params+'){' + statements_stmts + '} end';
 

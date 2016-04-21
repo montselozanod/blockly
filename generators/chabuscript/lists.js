@@ -17,7 +17,10 @@
 
    if(varIsUnique(text_list_name) && funcIsUnique(text_list_name))
    {
-     addLocalVar(text_list_name, type, address, 1);
+     switch(dropdown_type)
+     var size = parseInt(text_size);
+     addLocalVar(text_list_name, type, address, 1, size);
+
    }
 
    return '';
@@ -28,7 +31,11 @@
    var text_listname_name = block.getFieldValue('listName_name');
    Blockly.Chabuscript.statementToCode(block, 'values');
 
-   addLocalVar(text_listname_name, type, address, 1);
+   if(varIsUnique(text_list_name) && funcIsUnique(text_list_name))
+   {
+     addLocalVar(text_list_name, type, address, 1);
+   }
+   listElements = 0;
    return '';
  };
 
@@ -36,6 +43,7 @@
   var text_list_item = block.getFieldValue('list_ITEM');
   // REVIEW: que pasa con la , cuando es el ultimo item
   var code = text_list_item + ',';
+
   return code;
 };
 

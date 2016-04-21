@@ -153,9 +153,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
   }
 
   var func = this[block.type];
-  goog.asserts.assertFunction(func,
-      'Language "%s" does not know how to generate code for block type "%s".',
-      this.name_, block.type);
+
   // First argument to func.call is the value of 'this' in the generator.
   // Prior to 24 September 2013 'this' was the only way to access the block.
   // The current prefered method of accessing the block is through the second
@@ -174,7 +172,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
     // Block has handled code generation itself.
     return '';
   } else {
-    goog.asserts.fail('Invalid code generated: %s', code);
+    return code;
   }
 };
 
@@ -239,11 +237,6 @@ Blockly.Generator.prototype.statementToCode = function(block, name) {
   var code = this.blockToCode(targetBlock);
   // Value blocks must return code and order of operations info.
   // Statement blocks must only return code.
-  goog.asserts.assertString(code, 'Expecting code from statement block "%s".',
-      targetBlock && targetBlock.type);
-  if (code) {
-    code = this.prefixLines(/** @type {string} */ (code), this.INDENT);
-  }
   return code;
 };
 

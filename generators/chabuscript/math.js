@@ -74,6 +74,12 @@ Blockly.Chabuscript['random'] = function(block) {
   var value_min = Blockly.Chabuscript.valueToCode(block, 'min', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_max = Blockly.Chabuscript.valueToCode(block, 'max', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'random num min:' + value_min + ' max:' + value_max;
+
+  var op = Operation.RND; //random
+  //var min =
+
+  //quadruples.push([op, min, max, result]);
+
   return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
