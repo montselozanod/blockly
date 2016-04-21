@@ -36,11 +36,12 @@
   return code;
 };
 
-Blockly.Chabuscript['add_item'] = function(block) {
-  var text_list_item = block.getFieldValue('list_ITEM');
-  var text_new_item = block.getFieldValue('new_Item');
-  // REVIEW: con gramatica
-  var code = 'list' + text_list_item + 'add' + text_new_item + ';';
+Blockly.Chabuscript['list_put'] = function(block) {
+  var text_list_name = block.getFieldValue('list_name');
+  var text_item = block.getFieldValue('item');
+  var text_index = block.getFieldValue('index');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
   return code;
 };
 

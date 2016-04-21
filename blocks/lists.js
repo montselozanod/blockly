@@ -47,20 +47,21 @@ Blockly.Blocks['list_item'] = {
   }
 };
 
-  Blockly.Blocks['add_item'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField("in list")
-          .appendField(new Blockly.FieldTextInput("NAME"), "list_ITEM")
-          .appendField("add item")
-          .appendField(new Blockly.FieldTextInput("ITEM"), "new_Item");
-      this.setInputsInline(true);
-      this.setPreviousStatement(true);
-      this.setNextStatement(true);
-      this.setColour(90);
-      this.setTooltip('');
-    }
-  };
+Blockly.Blocks['list_put'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("in list")
+        .appendField(new Blockly.FieldTextInput("NAME"), "list_name")
+        .appendField("put item")
+        .appendField(new Blockly.FieldTextInput("ITEM"), "item")
+        .appendField("at")
+        .appendField(new Blockly.FieldTextInput("INDEX"), "index");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip('');
+  }
+};
 
   Blockly.Blocks['remove_item'] = {
     init: function() {
