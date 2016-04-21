@@ -108,6 +108,15 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
     var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
 
     var dirInicio = dirProcs[text_func_name][1];
+
+    // Check if number of params with which function is being invoked is the correct one
+    if(paramNumber != funcParamNum)
+    {
+      var message = String.format(errors['PARAMETER_LENGTH_MISMATCH'], text_func_id, funcParamNum, paramNumber);
+      printToShell(message, true); //this is an error
+      return;
+    }
+
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
   }
 
@@ -128,6 +137,16 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
     //transformar params
     var params = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
     var dirInicio = dirProcs[text_func_id][1];
+    var funcParamNum = getProcParams(text_func_id).length;
+
+    // Check if number of params with which function is being invoked is the correct one
+    if(paramNumber != funcParamNum)
+    {
+      var message = String.format(errors['PARAMETER_LENGTH_MISMATCH'], text_func_id, funcParamNum, paramNumber);
+      printToShell(message, true); //this is an error
+      return;
+    }
+
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
   }
 
@@ -135,12 +154,21 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   return code;
 };
 
+//TODO check parameter type mismatch
 Blockly.Chabuscript['func_param'] = function(block) {
   var text_param = block.getFieldValue('param');
-
+  var funcParams = getProcParams(currentFuncName);
+  var expectedType = funcParams[paramNumber + 1];
+  var type = checkParamType(text_param);
+  if(expectedType != type)
+  {
+    var message = String.format(errors['PARAMETER_TYPE_MISMATCH'], currentFuncName, expectedType, type, (paramNumber +1) );
+    printToShell(message, true);
+    return true;
+  }
   var op = Operation.PARAM;
   var address;      //TODO Check address of textparam...is it a constant or a variable (regex)
   var pNumber = ++paramNumber;
-  quadruples.push([op, address, , pNumber]);
+  quadruples.push([op, address, null, pNumber]);
   return text_param;
 };
