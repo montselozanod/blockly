@@ -97,6 +97,7 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
 
 Blockly.Chabuscript['invokefuncreturn'] = function(block) {
   var text_func_name = block.getFieldValue('func_name');
+  currentFuncName = text_func_name;
   if(funcIsUnique(text_func_name))
   {
     var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_name);
@@ -126,7 +127,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
 
 Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   var text_func_id = block.getFieldValue('func_id');
-
+  currentFuncName = text_func_id;
   if(funcIsUnique(text_func_name))
   {
     var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_name);
@@ -154,20 +155,22 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   return code;
 };
 
-//TODO check parameter type mismatch
 Blockly.Chabuscript['func_param'] = function(block) {
   var text_param = block.getFieldValue('param');
   var funcParams = getProcParams(currentFuncName);
   var expectedType = funcParams[paramNumber + 1];
-  var type = checkParamType(text_param);
-  if(expectedType != type)
+  var typeAddress = checkParamType(text_param);
+  var varType = typeAddress[0];
+  var address = typeAddress[1];
+
+  //check the type of the parameter
+  if(expectedType != varType)
   {
-    var message = String.format(errors['PARAMETER_TYPE_MISMATCH'], currentFuncName, expectedType, type, (paramNumber +1) );
+    var message = String.format(errors['PARAMETER_TYPE_MISMATCH'], currentFuncName, expectedType, varType, (paramNumber +1) );
     printToShell(message, true);
     return true;
   }
   var op = Operation.PARAM;
-  var address;      //TODO Check address of textparam...is it a constant or a variable (regex)
   var pNumber = ++paramNumber;
   quadruples.push([op, address, null, pNumber]);
   return text_param;
