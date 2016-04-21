@@ -76,7 +76,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
        break
 
     }
-    addLocalVar(text_param_name, type, address);
+    addLocalVar(text_param_name, type, address, 0);
     params.push(type);
   } else {
     var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_param_name);
@@ -94,7 +94,7 @@ Blockly.Chabuscript['return_stmt'] = function(block) {
   arg2 = null;
 
   quadruples.push([op, result, arg1, arg2]);
-  return code;
+  return '';
 };
 
 Blockly.Chabuscript['invokefuncreturn'] = function(block) {

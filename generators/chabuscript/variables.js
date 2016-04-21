@@ -33,7 +33,7 @@
         break
 
      }
-     addLocalVar(text_var_id, type, address);
+     addLocalVar(text_var_id, type, address, 0);
      var code = dropdown_type + " " + text_var_id;
      return code;
    } else {

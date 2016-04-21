@@ -8,7 +8,7 @@ Blockly.Blocks['list_values'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("list")
-        .appendField(new Blockly.FieldDropdown([["number", "NUMBER"], ["string", "STRING"], ["bool", "BOOL"]]), "param_type")
+        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "param_type")
         .appendField(new Blockly.FieldTextInput("NAME"), "listName_name");
     this.appendStatementInput("values");
     this.setInputsInline(true);
