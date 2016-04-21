@@ -6,6 +6,7 @@ goog.require('Blockly.Chabuscript');
 
 
 Blockly.Chabuscript['func_block'] = function(block) {
+  initMemVars();
   var startQuad = quadruples.length;
   var dropdown_type = block.getFieldValue('type');
   var text_funcname = block.getFieldValue('funcName');
@@ -39,6 +40,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
 };
 
 Blockly.Chabuscript['main'] = function(block) {
+  initMemVars();
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
 
