@@ -17,9 +17,9 @@
 
    if(varIsUnique(text_list_name) && funcIsUnique(text_list_name))
    {
-     switch(dropdown_type)
-     var size = parseInt(text_size);
-     addLocalVar(text_list_name, type, address, 1, size);
+
+     //var size = parseInt(text_size);
+     //addLocalVar(text_list_name, type, address, 1, size);
 
    }
 
@@ -44,6 +44,7 @@
   // REVIEW: que pasa con la , cuando es el ultimo item
   var code = text_list_item + ',';
 
+  listElements = listElements++;
   return code;
 };
 
