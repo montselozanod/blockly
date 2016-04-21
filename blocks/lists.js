@@ -4,6 +4,21 @@ goog.provide('Blockly.Blocks.lists');
 
 goog.require('Blockly.Blocks');
 
+Blockly.Blocks['list_empty'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("list")
+        .appendField(new Blockly.FieldDropdown([["number", "number"], ["string", "string"], ["boolean", "boolean"]]), "type")
+        .appendField(new Blockly.FieldTextInput("NAME"), "list_name")
+        .appendField("size")
+        .appendField(new Blockly.FieldTextInput("VALUE"), "size");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Blocks['list_values'] = {
   init: function() {
     this.appendDummyInput()
