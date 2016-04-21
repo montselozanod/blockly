@@ -9,11 +9,23 @@
 
  goog.require('Blockly.Chabuscript');
 
+
+ Blockly.Chabuscript['list_empty'] = function(block) {
+   var dropdown_type = block.getFieldValue('type');
+   var text_list_name = block.getFieldValue('list_name');
+   var text_size = block.getFieldValue('size');
+   // TODO: Assemble JavaScript into code variable.
+   var code = '...;\n';
+   return code;
+ };
+
  Blockly.Chabuscript['list_values'] = function(block) {
    var dropdown_param_type = block.getFieldValue('param_type');
    var text_listname_name = block.getFieldValue('listName_name');
    var statements_values = Blockly.Chabuscript.statementToCode(block, 'values');
    var code = 'list' + dropdown_param_type + 'id=' + text_listname_name + '(' + statements_values + ')';
+
+   addLocalVar(text_listname_name, type, address, 1);
    return code;
  };
 
