@@ -13,7 +13,7 @@ Blockly.Chabuscript['color'] = function(block) {
   //TODO memory addresses of colors
   //quadruples.push([Operation.COLOR, parseInt(value_red), parseInt(value_green), parseInt(value_blue)]);
   var op = Operation.COLOR;
-  if()
+
 
   return code;
 };
