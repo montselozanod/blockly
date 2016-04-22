@@ -12,7 +12,6 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var text_funcname = block.getFieldValue('funcName');
   Blockly.Chabuscript.statementToCode(block, 'params');
   var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
-  var code = 'function ' + dropdown_type + ' ' + text_funcname + 'params:(' + statements_params+'){' + statements_stmts + '} end';
 
   if(funcIsUnique(text_funcname))
   {
@@ -78,6 +77,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
     }
     addLocalVar(text_param_name, type, address, 0);
     params.push(type);
+    return '';
   } else {
     var message = String.format(errors['DUPLICATE_VARIABLE_NAME'], text_param_name);
     printToShell(message, true);
