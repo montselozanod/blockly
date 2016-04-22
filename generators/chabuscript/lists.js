@@ -65,7 +65,7 @@
         //input is a variable
       valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
       quadruples.push([op, valueAddress, null, indexAddress]);
-      listElements += listElements; //es el index empezando desde cero
+      listElements += 1; //es el index empezando desde cero
       pOper.push(list_name);
       return '';
   }else if(value[0] != false)
