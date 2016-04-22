@@ -34,7 +34,7 @@
    var dropdown_param_type = block.getFieldValue('param_type');
    var text_listname_name = block.getFieldValue('listName_name');
 
-   if(varIsUnique(text_list_name) && funcIsUnique(text_list_name))
+   if(varIsUnique(text_listname_name) && funcIsUnique(text_listname_name))
    {
      var type = checkListType(dropdown_param_type);
      var startAddress = sumAddress(type, 0); //sumar a direccion las casillas del size del arreglo
