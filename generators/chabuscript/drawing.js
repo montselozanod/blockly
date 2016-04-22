@@ -12,6 +12,8 @@ Blockly.Chabuscript['color'] = function(block) {
   var code = 'color(' + value_red + ',' + value_green + ',' + value_blue + ')';
   //TODO memory addresses of colors
   //quadruples.push([Operation.COLOR, parseInt(value_red), parseInt(value_green), parseInt(value_blue)]);
+  var op = Operation.COLOR;
+
   return code;
 };
 
@@ -65,5 +67,6 @@ Blockly.Chabuscript['rectangle'] = function(block) {
 Blockly.Chabuscript['background'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'background ' + value_color;
+  quadrupes.push([Operation.BCK, null, null, null]);
   return code;
 };
