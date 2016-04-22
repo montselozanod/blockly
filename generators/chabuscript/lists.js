@@ -38,11 +38,11 @@
    {
      var type = checkListType(dropdown_param_type);
      var startAddress = sumAddress(type, 0); //sumar a direccion las casillas del size del arreglo
-     addLocalVar(text_list_name, type, startAddress, 1, 0); // size is always +1, but index starts with zero
-     pOper.push(text_list_name);
+     addLocalVar(text_listname_name, type, startAddress, 1, 0); // size is always +1, but index starts with zero
+     pOper.push(text_listname_name);
      Blockly.Chabuscript.statementToCode(block, 'values');
      pOper.pop();
-     addLocalVar(text_list_name, type, startAddress, 1, listElements+1); // size is always +1, but index starts with zero
+     addLocalVar(text_listname_name, type, startAddress, 1, listElements+1); // size is always +1, but index starts with zero
      sumAddress(type, listElements+1);
      listElements = 0;
      return '';
