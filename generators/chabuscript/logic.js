@@ -100,6 +100,5 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
 
 Blockly.Chabuscript['boolean_expression'] = function(block) {
   var dropdown_flag = block.getFieldValue('flag');
-
   return dropdown_flag;
 };
