@@ -59,6 +59,7 @@
   var op = Operation.PUT;
   var value = checkInputType(text_list_item, type);
   var valueAddress;
+  var indexAddress = varTable[list_name][1];
   if(text_list_item in varTable && varTable[text_list_item][0] == type)
   {
         //input is a variable
