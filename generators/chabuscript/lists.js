@@ -72,7 +72,7 @@
   { //input is a constant
     valueAddress = addConstant(value[1], listType);
     quadruples.push([op, valueAddress, null, indexAddress]);
-    listElements += listElements; //es el index empezando desde cero
+    listElements += 1; //es el index empezando desde cero
     pOper.push(list_name);
     return '';
   }else{
