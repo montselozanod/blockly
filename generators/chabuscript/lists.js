@@ -42,8 +42,8 @@
      pOper.push(text_listname_name);
      Blockly.Chabuscript.statementToCode(block, 'values');
      pOper.pop();
-     addLocalVar(text_listname_name, type, startAddress, 1, listElements+1); // size is always +1, but index starts with zero
-     sumAddress(type, listElements+1);
+     addLocalVar(text_listname_name, type, startAddress, 1, listElements); // size is always +1, but index starts with zero
+     sumAddress(type, listElements);
      listElements = 0;
      return '';
    }else{
@@ -59,18 +59,20 @@
   var op = Operation.PUT;
   var value = checkInputType(text_list_item, type);
   var valueAddress;
-  var indexAddress = varTable[list_name][1];
+  var indexAddress = varTable[list_name][1]+listElements;
   if(text_list_item in varTable && varTable[text_list_item][0] == type)
   {
         //input is a variable
       valueAddress = varTable[text_item][0];
       quadruples.push([op, valueAddress, null, (indexAddress)]);
+      listElements += listElements++; //es el index empezando desde cero
+      pOper.push(list_name);
       return '';
   }else if(value[0] != false)
   { //input is a constant
     valueAddress = addConstant(value[1], type);
     quadruples.push([op, valueAddress, null, (indexAddress)]);
-    listElements = listElements++; //es el index empezando desde cero
+    listElements += listElements++; //es el index empezando desde cero
     pOper.push(list_name);
     return '';
   }else{
@@ -84,32 +86,44 @@ Blockly.Chabuscript['list_put'] = function(block) {
   var text_item = block.getFieldValue('item');
   var text_index = block.getFieldValue('index');
 
-  var index = parseInt(text_index);
-  if(validateListAccess(index, text_index, text_list_name))
+  var indexInfo = checkParamType(text_index);
+
+  var listType = varTable[text_list_name][TableVarAccess.TYPE];
+  var value = checkInputType(text_item, listType);
+  var indexAddress = varTable[text_list_name][TableVarAccess.ADDRESS] + index;
+
+  //verificar index
+  if(indexInfo[0] == Type.NUMBER)
   {
-      var type = varTable[text_list_name][0];
-      var value = checkInputType(text_item, type);
-      var indexAddress = varTable[text_list_name][0] + index;
-      var op = Operation.PUT;
-      var valueAddress;
-      if(text_item in varTable && varTable[text_item][0] == type)
-      {
-            //input is a variable
-          valueAddress = varTable[text_item][0];
-          quadruples.push([op, valueAddress, null, (indexAddress)]);
-          return '';
-      }
-      else if(value != false)
-      { //input is a constant
-        valueAddress = addConstant(value, type);
+    var op = Operation.SUM;
+    var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
+    quadrupes.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+
+    op = Operation.VER;
+    quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
+
+    //verificar lo que vas agregar
+    var valueAddress;
+    if(text_item in varTable && varTable[text_item][TableVarAccess.TYPE] == listType)
+    {
+          //input is a variable
+        valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
+        op = Operation.PUT;
         quadruples.push([op, valueAddress, null, (indexAddress)]);
         return '';
-      }else{
-        var message = String.format(errors['INCORRECT_TYPE'], text_item, text_list_name);
-        printToShell(message, true);
-
-      }
+    }
+    else if(value[0] != false)
+    {
+      //input is a constant
+      valueAddress = addConstant(value[1], listType);
+      quadruples.push([op, valueAddress, null, (indexAddress)]);
+      return '';
+    }
+  }else{
+    var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
+    printToShell(message, true);
   }
+
 };
 
 
