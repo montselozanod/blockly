@@ -57,7 +57,7 @@
   var list_name = pOper.pop();
   var listType = varTable[list_name][TableVarAccess.TYPE];
   var op = Operation.INITPUT;
-  var value = checkInputType(text_list_item, type);
+  var value = checkInputType(text_list_item, listType);
   var valueAddress;
   var indexAddress = varTable[list_name][TableVarAccess.ADDRESS]+listElements;
   if(text_list_item in varTable && varTable[text_list_item][TableVarAccess.TYPE] == listType)
@@ -70,7 +70,7 @@
       return '';
   }else if(value[0] != false)
   { //input is a constant
-    valueAddress = addConstant(value[1], type);
+    valueAddress = addConstant(value[1], listType);
     quadruples.push([op, valueAddress, null, indexAddress]);
     listElements += listElements; //es el index empezando desde cero
     pOper.push(list_name);
