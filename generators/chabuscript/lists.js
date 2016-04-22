@@ -66,9 +66,9 @@
       valueAddress = varTable[text_item][0];
       quadruples.push([op, valueAddress, null, (indexAddress)]);
       return '';
-  }else if(value != false)
+  }else if(value[0] != false)
   { //input is a constant
-    valueAddress = addConstant(value, type);
+    valueAddress = addConstant(value[1], type);
     quadruples.push([op, valueAddress, null, (indexAddress)]);
     listElements = listElements++; //es el index empezando desde cero
     pOper.push(list_name);
