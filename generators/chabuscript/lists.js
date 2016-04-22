@@ -55,24 +55,24 @@
  Blockly.Chabuscript['list_item'] = function(block) {
   var text_list_item = block.getFieldValue('list_ITEM');
   var list_name = pOper.pop();
-  var type = varTable[list_name][0];
-  var op = Operation.PUT;
+  var listType = varTable[list_name][TableVarAccess.TYPE];
+  var op = Operation.INITPUT;
   var value = checkInputType(text_list_item, type);
   var valueAddress;
-  var indexAddress = varTable[list_name][1]+listElements;
-  if(text_list_item in varTable && varTable[text_list_item][0] == type)
+  var indexAddress = varTable[list_name][TableVarAccess.ADDRESS]+listElements;
+  if(text_list_item in varTable && varTable[text_list_item][TableVarAccess.TYPE] == listType)
   {
         //input is a variable
-      valueAddress = varTable[text_item][0];
-      quadruples.push([op, valueAddress, null, (indexAddress)]);
-      listElements += listElements++; //es el index empezando desde cero
+      valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
+      quadruples.push([op, valueAddress, null, indexAddress]);
+      listElements += listElements; //es el index empezando desde cero
       pOper.push(list_name);
       return '';
   }else if(value[0] != false)
   { //input is a constant
     valueAddress = addConstant(value[1], type);
-    quadruples.push([op, valueAddress, null, (indexAddress)]);
-    listElements += listElements++; //es el index empezando desde cero
+    quadruples.push([op, valueAddress, null, indexAddress]);
+    listElements += listElements; //es el index empezando desde cero
     pOper.push(list_name);
     return '';
   }else{
