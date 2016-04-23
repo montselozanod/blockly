@@ -19,7 +19,7 @@ Blockly.Chabuscript['logic_if'] = function(block) {
     return '';
   }
   else {
-    var message = String.format(errors['BOOL_CONDITION']);
+    var message = String.format(errors['BOOL_CONDITION'], "If");
     printToShell(message, true);
   }
 };
@@ -45,7 +45,7 @@ Blockly.Chabuscript['logic_if_else'] = function(block) {
     return '';
   }
   else {
-    var message = String.format(errors['BOOL_CONDITION']);
+    var message = String.format(errors['BOOL_CONDITION'], "If");
     printToShell(message, true);
   }
 };
@@ -85,12 +85,12 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
       return '';
     }
     else {
-      var message = String.format(errors['BOOL_CONDITION'], value_elsif);
+      var message = String.format(errors['BOOL_CONDITION'], "Else-if");
       printToShell(message, true);
     }
   }
   else {
-    var message = String.format(errors['BOOL_CONDITION'], value_if);
+    var message = String.format(errors['BOOL_CONDITION'], "If");
     printToShell(message, true);
   }
 };
