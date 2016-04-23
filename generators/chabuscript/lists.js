@@ -96,7 +96,7 @@ Blockly.Chabuscript['list_put'] = function(block) {
   {
     var op = Operation.SUM;
     var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
-    quadrupes.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+    quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
 
     op = Operation.VER;
     quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
@@ -142,13 +142,13 @@ Blockly.Chabuscript['remove_item'] = function(block) {
   {
     var op = Operation.SUM;
     var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
-    quadrupes.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+    quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
 
     op = Operation.VER;
     quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
     op = Operation.REMOVE;
-    quadrupes.push([op, (resultIndexAdd), null, null]);
+    quadruples.push([op, (resultIndexAdd), null, null]);
   }else{
     var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
     printToShell(message, true);
