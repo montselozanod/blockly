@@ -7,68 +7,92 @@ goog.require('Blockly.Chabuscript');
 Blockly.Chabuscript['logic_if'] = function(block) {
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  var jump_false = quadruples.length; // index of last quad
-  quadruples.push([GOTOF, quadruples[value_if][3], null, 0]); // REVIEW: result from previous quad - uadruples[value_if][3]
+  if (checkListType(value_if) == Type.BOOL) {
+    var flag = pilaO.pop();
+    quadruples.push([GOTOF, flag, null, 0]);
+    var jump_false = quadruples.length-1; // push pSaltos cont-1
 
-  var statements_if_do = Blockly.Chabuscript.statementToCode(block, 'IF_DO');
-  quadruples[jump_false][3] = quadruples.length; // changing gotoF
+    Blockly.Chabuscript.statementToCode(block, 'IF_DO');
 
-  var code = 'if' + value_if + statements_if_do + 'end';
-  return code;
+    quadruples[jump_false][3] = quadruples.length;
+
+    return '';
+  }
+  else {
+    var message = String.format(errors['BOOL_CONDITION']);
+    printToShell(message, true);
+  }
 };
 
 Blockly.Chabuscript['logic_if_else'] = function(block) {
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  var jump_false = quadruples.length;
-  var jump;
-  quadruples.push([GOTOF, quadruples[value_if][3], null, 0]);
+  if (checkListType(value_if) == Type.BOOL) {
+    var flag = pilaO.pop();
+    quadruples.push([GOTOF, flag, null, 0]);
+    var jump_false = quadruples.length-1; // push pSaltos cont-1
 
-  var statements_if_do = Blockly.Chabuscript.statementToCode(block, 'IF_DO');
+    Blockly.Chabuscript.statementToCode(block, 'IF_DO');
 
-  jump = quadruples.length;
-  quadruples.push(GOTO, null, null, 0);
-  quadruples[jump_false][3] = quadruples.length;
+    quadruples.push(GOTO, null, null, 0);
+    quadruples[jump_false][3] = quadruples.length;
+    var jump = quadruples.length-1;
 
-  var statements_else_do = Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
+    Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
 
-  quadruples[jump][3] = quadruples.length;
+    quadruples[jump][3] = quadruples.length;
 
-  var code = 'if' + value_if + statements_if_do + 'else' + statements_else_do + 'end;';
-  return code;
+    return '';
+  }
+  else {
+    var message = String.format(errors['BOOL_CONDITION']);
+    printToShell(message, true);
+  }
 };
 
 Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
 
-  //REVIEW: toda la logica de los goto y gotoF de esto
-
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  var jump_false = quadruples.length;
-  var jump;
-  quadruples.push([GOTOF, quadruples[value_if][3], null, 0]);
+  if (checkListType(value_if) == Type.BOOL) {
+    var flag = pilaO.pop(); // valor de la condicion
+    quadruples.push([GOTOF, flag, null, 0]);
+    var jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar if
 
-  var statements_if_do = Blockly.Chabuscript.statementToCode(block, 'IF_DO');
-  var value_elsif = Blockly.Chabuscript.valueToCode(block, 'ELSIF', Blockly.Chabuscript.ORDER_ATOMIC);
+    Blockly.Chabuscript.statementToCode(block, 'IF_DO');
 
-  jump = quadruples.length;
-  quadruples.push([GOTOF, quadruples[value_elsif][3], null, 0]);
-  quadruples[jump_false][3] = quadruples.length;
-  jump_false = quadruples.length;
+    quadruples.push(GOTO, null, null, 0);
+    quadruples[jump_false][3] = quadruples.length; // rellena GOTOF para que brinque a elsif
+    var jump_if = quadruples.length-1; // el quad que debe rellenar despues de brincar elsif y else
 
-  var statements_elsif_do = Blockly.Chabuscript.statementToCode(block, 'ELSIF_DO');
+    var value_elsif = Blockly.Chabuscript.valueToCode(block, 'ELSIF', Blockly.Chabuscript.ORDER_ATOMIC);
+    if (checkListType(value_elsif) == Type.BOOL) {
+      flag = pilaO.pop();
+      quadruples.push([GOTOF, flag, null, 0]);
+      jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar elsif
 
+      Blockly.Chabuscript.statementToCode(block, 'ELSIF_DO');
 
-  jump = quadruples.length;
-  quadruples.push([GOTO, null, null, 0]);
-  quadruples[jump_false][3] = quadruples.length;
+      quadruples.push([GOTO, null, null, 0]);
+      quadruples[jump_false][3] = quadruples.length; // rellena GOTOF para que brinque a else
+      jump_elseif = quadruples.length-1; // el quad que debe rellenar despues de brincar else
 
-  var statements_else_do = Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
+      Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
 
-  quadruples[jump][3] = quadruples.length;
+      quadruples[jump_if][3] = quadruples.length; // a donde debe brincar despues de terminar el if
+      quadruples[jump_elseif][3] = quadruples.length; // a donde debe brincar despues de terminar el elseif
 
-  var code = 'if' + value_if + statements_if_do + 'elif' + value_elsif + statements_elsif_do + 'else' + statements_else_do + 'end;';
-  return code;
+      return '';
+    }
+    else {
+      var message = String.format(errors['BOOL_CONDITION'], value_elsif);
+      printToShell(message, true);
+    }
+  }
+  else {
+    var message = String.format(errors['BOOL_CONDITION'], value_if);
+    printToShell(message, true);
+  }
 };
 
 Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
