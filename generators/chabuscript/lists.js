@@ -76,7 +76,7 @@
     pOper.push(list_name);
     return '';
   }else{
-    var message = String.format(errors['INCORRECT_TYPE'], text_item, text_list_name);
+    var message = String.format(errors['INCORRECT_TYPE'], text_list_item, list_name);
     printToShell(message, true);
   }
 };
