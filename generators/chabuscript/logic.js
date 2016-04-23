@@ -101,15 +101,18 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   var value_right = Blockly.Chabuscript.valueToCode(block, 'right', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = value_left + dropdown_compare + value_right;
 
-  var quad, op, arg1, arg2, result;
+  var op, arg1, arg2, result;
 
   if (dropdown_compare == "equals") {
     op = Operation.EQL
-  } else if (dropdown_compare == "less") {
+  }
+  else if (dropdown_compare == "less") {
     op = Operation.LESS
-  } else if (dropdown_compare == "greater") {
+  }
+  else if (dropdown_compare == "greater") {
     op = Operation.GRT
-  } else {
+  }
+  else {
     op = Operation.DIFF
   }
 
@@ -119,10 +122,13 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
 
   quadruples.push([op, arg1, arg2, result]);
 
-  return quadruples.length-1; // return the quadruple index
+  return '';
 };
 
 Blockly.Chabuscript['boolean_expression'] = function(block) {
   var dropdown_flag = block.getFieldValue('flag');
-  return dropdown_flag;
+
+  var dropdown_flag = 'TRUE' ? pilaO.push(true) : pilaO.push(false);
+
+  return '';
 };
