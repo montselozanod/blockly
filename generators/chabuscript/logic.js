@@ -128,7 +128,11 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
 Blockly.Chabuscript['boolean_expression'] = function(block) {
   var dropdown_flag = block.getFieldValue('flag');
 
-  var dropdown_flag = 'TRUE' ? pilaO.push(true) : pilaO.push(false);
+  if (dropdown_flag === "TRUE") {
+    pilaO.push(true);
+  } else {
+    pilaO.push(false);
+  }
 
   return '';
 };
