@@ -6,8 +6,27 @@ goog.require('Blockly.Chabuscript');
 
 
 Blockly.Chabuscript['loop_while'] = function(block) {
+  //var code = 'repeat while(' + value_while_cond + ')' + statements_while_stmts + 'end;';
+
+  var jump_false = quadruples.length;
+
   var value_while_cond = Blockly.Chabuscript.valueToCode(block, 'while_cond', Blockly.Chabuscript.ORDER_ATOMIC);
-  var statements_while_stmts = Blockly.Chabuscript.statementToCode(block, 'while_stmts');
-  var code = 'repeat while(' + value_while_cond + ')' + statements_while_stmts + 'end;';
-  return code;
+
+  if (checkInputType(value_while_cond, Type.BOOL)) {
+    var flag = pilaO.pop();
+    quadruples.push([GOTOF, flag, null, 0]);
+    var jump = quadruples.length-1;
+
+    Blockly.Chabuscript.statementToCode(block, 'while_stmts');
+
+    quadruples.push([GOTO, null, null, jump]);
+    quadruples[jump_false][3] = quadruples.length;
+
+    return '';
+
+  }
+  else {
+    var message = String.format(errors['BOOL_CONDITION'], "While");
+    printToShell(message, true);
+  }
 };
