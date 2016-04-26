@@ -115,7 +115,7 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   else {
     op = Operation.DIFF
   }
-
+  //TODO checar si son expresiones o variables
   arg1 = boolMem++;
   arg2 = boolMem++;
   result = tmpBoolMem++;
