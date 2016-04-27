@@ -124,6 +124,7 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   }else{
     //display error
     var message = String.format(errors['INCOMPATIBLE'], dropdown_compare);
+    printToShell(message, true);
   }
 };
 

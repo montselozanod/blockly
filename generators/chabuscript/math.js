@@ -10,15 +10,24 @@ Blockly.Chabuscript['assign'] = function(block) {
   var code = value_opizq + '=' + value_opder + ';';
 
   var op, arg1, arg2, result;
+  var resultType = semanticCube[value_opizq.type][value_opder.type][Operation.ASSIGN];
 
-  op = Operation.ASSIGN;
-  arg1 = tmpNumMem++;
-  arg2 = null;
-  result = numMem++;
+  if(resultType != Type.ERR)
+  {
+    op = Operation.ASSIGN;
 
-  quadruples.push([op, arg1, arg2, result]);
+    arg1 = value_opder.address;
+    arg2 = null;
+    result = value_opizq.address;
 
-  return quadruples.length-1;
+    quadruples.push([op, arg1, arg2, result]);
+
+    return quadruples.length-1;
+  }else{
+    var message = String.format(errors['INCOMPATIBLE_TYPE_OP'], getTypeStringFromEnum(value_opizq.type), getTypeStringFromEnum(value_opder.type), 'assignment.');
+    printToShell(message, true);
+  }
+
 };
 
 Blockly.Chabuscript['term'] = function(block) {
@@ -42,7 +51,7 @@ Blockly.Chabuscript['term'] = function(block) {
 
   quadruples.push([op, arg1, arg2, result]);
 
-  return [quadruples.length-1, Blockly.Chabuscript.ORDER_MULTIPLICATION];
+  return {type: Type.NUMBER, address: result};
 };
 
 Blockly.Chabuscript['exp'] = function(block) {
