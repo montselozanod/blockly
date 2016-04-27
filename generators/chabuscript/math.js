@@ -77,7 +77,7 @@ Blockly.Chabuscript['random'] = function(block) {
 
   var op = Operation.RND; //random
   //var min =
-
+  var result = tmpNumMem++;
   //quadruples.push([op, min, max, result]);
 
   return [code, Blockly.Chabuscript.ORDER_NONE];

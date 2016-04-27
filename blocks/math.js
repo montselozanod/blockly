@@ -27,7 +27,6 @@ Blockly.Blocks['term'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["x", "MULT"], ["÷", "DIV"]]), "op");
     this.appendValueInput("opDer")
-        .setCheck("Number");
     this.setOutput(true, "expression");
     this.setColour(230);
     this.setTooltip('');
@@ -41,7 +40,6 @@ Blockly.Blocks['exp'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["+", "SUM"], ["-", "MINUS"]]), "op");
     this.appendValueInput("opDer")
-        .setCheck("Number");
     this.setOutput(true, "expression");
     this.setColour(230);
     this.setTooltip('');
@@ -53,10 +51,8 @@ Blockly.Blocks['random'] = {
     this.appendDummyInput()
         .appendField("random number");
     this.appendValueInput("min")
-        .setCheck("Number")
         .appendField("MIN:");
     this.appendValueInput("max")
-        .setCheck("Number")
         .appendField("MAX:");
     this.setInputsInline(true);
     this.setOutput(true, "expression");
