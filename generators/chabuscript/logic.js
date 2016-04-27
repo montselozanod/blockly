@@ -75,7 +75,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
 
       quadruples.push([Operation.GOTO, null, null, 0]);
       quadruples[jump_false][3] = quadruples.length; // rellena GOTOF para que brinque a else
-      jump_elseif = quadruples.length-1; // el quad que debe rellenar despues de brincar else
+      var jump_elseif = quadruples.length-1; // el quad que debe rellenar despues de brincar else
 
       Blockly.Chabuscript.statementToCode(block, 'ELSE_DO');
 
