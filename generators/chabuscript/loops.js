@@ -14,12 +14,12 @@ Blockly.Chabuscript['loop_while'] = function(block) {
 
   if (checkInputType(value_while_cond, Type.BOOL)) {
     var flag = pilaO.pop();
-    quadruples.push([GOTOF, flag, null, 0]);
+    quadruples.push([Operation.GOTOF, flag, null, 0]);
     var jump = quadruples.length-1;
 
     Blockly.Chabuscript.statementToCode(block, 'while_stmts');
 
-    quadruples.push([GOTO, null, null, jump]);
+    quadruples.push([Operation.GOTO, null, null, jump]);
     quadruples[jump_false][3] = quadruples.length;
 
     return '';
