@@ -115,14 +115,16 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   else {
     op = Operation.DIFF
   }
-  //TODO checar si son expresiones o variables
-  arg1 = boolMem++;
-  arg2 = boolMem++;
-  result = tmpBoolMem++;
-
-  quadruples.push([op, arg1, arg2, result]);
-
-  return '';
+  var resultType = semanticCube[value_left.type][value_left.type][op];
+  if(resultType != Type.ERR)
+  {
+    result = tmpBoolMem++;
+    quadruples.push([op, value_left.address, value_right.address, result]);
+    return {type: Type.BOOL, address: result};
+  }else{
+    //display error
+    var message = String.format(errors['INCOMPATIBLE'], dropdown_compare);
+  }
 };
 
 Blockly.Chabuscript['boolean_expression'] = function(block) {

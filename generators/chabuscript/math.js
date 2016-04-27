@@ -66,7 +66,7 @@ Blockly.Chabuscript['exp'] = function(block) {
 
   quadruples.push([op, arg1, arg2, result]);
 
-  return [quadruples.length-1, Blockly.Chabuscript.ORDER_ADDITION];
+  return {type: Type.NUMBER, address: result};
 };
 
 
@@ -76,11 +76,22 @@ Blockly.Chabuscript['random'] = function(block) {
   var code = 'random num min:' + value_min + ' max:' + value_max;
 
   var op = Operation.RND; //random
-  //var min =
-  var result = tmpNumMem++;
-  //quadruples.push([op, min, max, result]);
+  var semanticCheckMin = (value_min.type == Type.NUMBER)?true:false;
+  var semanticCheckMax = (value_max.type == Type.NUMBER)?true:false;
+  if(semanticCheckMin && semanticCheckMax)
+  {
+    var result = tmpNumMem++;
+    quadruples.push([op, value_min.address, value_max.address, result]);
+    return {type: Type.NUMBER, address: result};
+  }else if(!semanticCheckMin){
+    var message = String.format(errors['INCORRECT_TYPE_OP'], 'min', 'random');
+    printToShell(message, true);
+  }else if(!semanticCheckMax)
+  {
+    var message = String.format(errors['INCORRECT_TYPE_OP'], 'max', 'random');
+    printToShell(message, true);
+  }
 
-  return [code, Blockly.Chabuscript.ORDER_NONE];
 };
 
 
