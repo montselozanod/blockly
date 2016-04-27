@@ -45,14 +45,7 @@
 
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
-   //check that variable exists
-   if(varExists(text_var_name))
-   {
-     var address = varTable[text_var_name][1];
-     return address;
-   }else{
-     var message = String.format(errors['UNDECLARED_VARIABLE'], text_var_name);
-     printToShell(message, true);
-   }
-
+   var input = checkParamType(input);
+   pOper.push(input);
+   return {type: input[0], address: input[1]};
  };

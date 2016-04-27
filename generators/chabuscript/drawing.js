@@ -10,12 +10,28 @@ Blockly.Chabuscript['color'] = function(block) {
   var value_green = Blockly.Chabuscript.valueToCode(block, 'green', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_blue = Blockly.Chabuscript.valueToCode(block, 'blue', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'color(' + value_red + ',' + value_green + ',' + value_blue + ')';
-  //TODO memory addresses of colors
-  //quadruples.push([Operation.COLOR, parseInt(value_red), parseInt(value_green), parseInt(value_blue)]);
+
+  var red = checkParamType(value_red, Type.NUMBER);
+  var green = checkParamType(value_green, Type.NUMBER);
+  var blue = checkParamType(value_blue, Type.NUMBER);
   var op = Operation.COLOR;
 
-
-  return code;
+  if(red[0] != Type.NUMBER)
+  {
+    var message = String.format(errors['INCORRECT_TYPE'], value_red, "color");
+    printToShell(message, true);
+  }else if(green[0] != Type.NUMBER)
+  {
+    var message = String.format(errors['INCORRECT_TYPE'], value_green, "color");
+    printToShell(message, true);
+  }else if(blue[0] != Type.NUMBER)
+  {
+    var message = String.format(errors['INCORRECT_TYPE'], value_blue, "color");
+    printToShell(message, true);
+  }else {
+    quadruples.push([op, red[1], green[1], blue[1]]);
+    return code;
+  }
 };
 
 Blockly.Chabuscript['draw'] = function(block) {
@@ -31,9 +47,20 @@ Blockly.Chabuscript['point'] = function(block) {
   var value_x = Blockly.Chabuscript.valueToCode(block, 'x', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_y = Blockly.Chabuscript.valueToCode(block, 'y', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'point x:' + value_x + ' y:' + value_y;
-  //memory addresses of color
-  //quadruples.push([Operation.POINT, value_x, value_y ])
-  return code;
+  var x = checkParamType(value_x);
+  var y = checkParamType(value_y);
+
+  if(x[0] != Type.NUMBER)
+  {
+    var message = String.format(errors['INCORRECT_TYPE'], value_x, "point");
+    printToShell(message, true);
+  }else if(y[0] != Type.NUMBER)
+  {
+    var message = String.format(errors['INCORRECT_TYPE'], value_y, "point");
+    printToShell(message, true);
+  }else{
+    return {xVal:x[1], yVal:y[1]};
+  }
 };
 
 Blockly.Chabuscript['line'] = function(block) {
@@ -54,6 +81,7 @@ Blockly.Chabuscript['circle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'circle at: ' + value_point + ' r:' + value_radius;
+  var radius = checkInputType(value_radius, Type.NUMBER);
   return code;
 };
 
@@ -68,6 +96,6 @@ Blockly.Chabuscript['rectangle'] = function(block) {
 Blockly.Chabuscript['background'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'background ' + value_color;
-  quadrupes.push([Operation.BCK, null, null, null]);
+  quadruples.push([Operation.BCK, null, null, null]);
   return code;
 };

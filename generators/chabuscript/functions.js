@@ -110,7 +110,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
 
     var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
 
-    var dirInicio = dirProcs[text_func_name][1];
+    var dirInicio = dirProcs[text_func_name][DirProcAccess.QUADINI];
 
     // Check if number of params with which function is being invoked is the correct one
     if(paramNumber != funcParamNum)
@@ -119,8 +119,9 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
       printToShell(message, true); //this is an error
       return;
     }
-
+    var address = tmpNumMem++;
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
+    quadruples.push([Operation.ASSIGN, text_func_name, null, address]); //assign de return value of de function
   }
 
   paramNumber = 0; //regresar valor a cero otra vez
@@ -170,10 +171,10 @@ Blockly.Chabuscript['func_param'] = function(block) {
   {
     var message = String.format(errors['PARAMETER_TYPE_MISMATCH'], currentFuncName, expectedType, varType, (paramNumber +1) );
     printToShell(message, true);
-    return true;
+  }else{
+    var op = Operation.PARAM;
+    var pNumber = ++paramNumber;
+    quadruples.push([op, address, null, pNumber]);
+    return text_param;
   }
-  var op = Operation.PARAM;
-  var pNumber = ++paramNumber;
-  quadruples.push([op, address, null, pNumber]);
-  return text_param;
 };
