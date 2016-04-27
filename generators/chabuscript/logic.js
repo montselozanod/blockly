@@ -115,7 +115,7 @@ Blockly.Chabuscript['boolean_compare_expression'] = function(block) {
   else {
     op = Operation.DIFF
   }
-  var resultType = semanticCube[value_left.type][value_left.type][op];
+  var resultType = semanticCube[value_left.type][value_right.type][op];
   if(resultType != Type.ERR)
   {
     result = tmpBoolMem++;

@@ -36,9 +36,19 @@ Blockly.Chabuscript['color'] = function(block) {
 
 Blockly.Chabuscript['draw'] = function(block) {
   var value_shape = Blockly.Chabuscript.valueToCode(block, 'shape', Blockly.Chabuscript.ORDER_ATOMIC);
-  var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
+  Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
+
+  var op = Operation.PW;
+  var inputPW = checkParamType(value_point_width);
+  if(inputPW[0] == Type.NUMBER)
+  {
+      quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
+  }else{
+
+  }
+
   return code;
 };
 
@@ -59,21 +69,30 @@ Blockly.Chabuscript['point'] = function(block) {
     var message = String.format(errors['INCORRECT_TYPE'], value_y, "point");
     printToShell(message, true);
   }else{
-    return {xVal:x[1], yVal:y[1]};
+    return {shape: Shape.POINT, xVal:x[1], yVal:y[1]};
   }
 };
 
 Blockly.Chabuscript['line'] = function(block) {
   var value_point1 = Blockly.Chabuscript.valueToCode(block, 'point1', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point2 = Blockly.Chabuscript.valueToCode(block, 'point2', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = 'line p1:' + value_point1 + ' p2: ' + value_point2;
-  return code;
+
+  var p1X = value_point1.xVal;
+  var p1Y = value_point1.yVal;
+
+  var p2X = value_point2.xVal;
+  var p2Y = value_point2.yVal;
+
+  return {shape: Shape.LINE,  };
 };
 
 Blockly.Chabuscript['polygon'] = function(block) {
   var value_points = Blockly.Chabuscript.valueToCode(block, 'points', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'polygon points ' + value_points;
-  return code;
+  // {[op, points]}
+  //check list
+
+  return {shape: Shape.POLYGON, };
 };
 
 
@@ -81,8 +100,18 @@ Blockly.Chabuscript['circle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'circle at: ' + value_point + ' r:' + value_radius;
-  var radius = checkInputType(value_radius, Type.NUMBER);
-  return code;
+  var pointX = value_point.xVal;
+  var pointY = value_point.yVal;
+
+  if(value_radius.type == Type.NUMBER)
+  {
+
+      return {shape: Shape.CIRCLE, radius: value_radius.address};
+  }else{
+    var message = String.format(errors['INCOMPATIBLE'], 'circle');
+    printToShell(message, true);
+  }
+
 };
 
 Blockly.Chabuscript['rectangle'] = function(block) {
@@ -90,6 +119,10 @@ Blockly.Chabuscript['rectangle'] = function(block) {
   var value_width = Blockly.Chabuscript.valueToCode(block, 'width', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_height = Blockly.Chabuscript.valueToCode(block, 'height', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'rectangle at:' + value_point + ' w:' + value_width + ' h:' + value_height;
+
+  var pX = value_point.xVal; //address
+  var pY = value_point.yVal; //address
+
   return code;
 };
 
@@ -97,5 +130,5 @@ Blockly.Chabuscript['background'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'background ' + value_color;
   quadruples.push([Operation.BCK, null, null, null]);
-  return code;
+  return '';
 };

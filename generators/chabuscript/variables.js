@@ -46,6 +46,7 @@
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
    var input = checkParamType(input);
-   pOper.push(input);
+   //pOper.push(input);
+
    return {type: input[0], address: input[1]};
  };
