@@ -44,9 +44,17 @@ Blockly.Chabuscript['draw'] = function(block) {
   var inputPW = checkParamType(value_point_width);
   if(inputPW[0] == Type.NUMBER)
   {
-      quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
+      if(shape in value_shape)
+      {
+        quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
+        quadruples.push([Operation.DRAW, value_shape.shape, null, null]);
+      }else{
+        var message = String.format(errors['SYNTAX_ERROR'], 'shape');
+        printToShell(message, true);
+      }
   }else{
-
+    var message = String.format(errors['INCORRECT_TYPE_OP'], 'point-width', 'DRAW');
+    printToShell(message, true);
   }
 
   return code;
@@ -69,7 +77,8 @@ Blockly.Chabuscript['point'] = function(block) {
     var message = String.format(errors['INCORRECT_TYPE'], value_y, "point");
     printToShell(message, true);
   }else{
-    return {shape: Shape.POINT, xVal:x[1], yVal:y[1]};
+    quadruples.push([Operation.POINT, x[1], y[1], null]);
+    return {shape: Operation.POINT, xVal:x[1], yVal:y[1]};
   }
 };
 
@@ -77,22 +86,38 @@ Blockly.Chabuscript['line'] = function(block) {
   var value_point1 = Blockly.Chabuscript.valueToCode(block, 'point1', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point2 = Blockly.Chabuscript.valueToCode(block, 'point2', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  var p1X = value_point1.xVal;
-  var p1Y = value_point1.yVal;
+  if(value_point1.shape === Shape.POINT && value_point2.shape === Shape.POINT)
+  {
+    return {shape: Operation.LINE};
+  }else{
+    var message = String.format(errors['SYNTAX_ERROR'], 'point');
+    printToShell(message, true);
+  }
 
-  var p2X = value_point2.xVal;
-  var p2Y = value_point2.yVal;
-
-  return {shape: Shape.LINE,  };
 };
 
 Blockly.Chabuscript['polygon'] = function(block) {
   var value_points = Blockly.Chabuscript.valueToCode(block, 'points', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'polygon points ' + value_points;
   // {[op, points]}
-  //check list
+  if(value_points.dimension == 1)
+  {
+    if(value_points.type == Type.NUMBER)
+    {
+      var op = Operation.POLYGON;
+      quadruples.push([op, value_points.address, null, null]);
+      return {shape: Operation.POLYGON};
 
-  return {shape: Shape.POLYGON, };
+    }else{
+      //print incorrect type
+      var message = String.format(errors['INCOMPATIBLE'], 'polygon');
+      printToShell(message, true);
+    }
+  }else{
+    var message = "Invalid type: input is not a list for operation polygon";
+    printToShell(message, true);
+  }
+
 };
 
 
@@ -105,8 +130,8 @@ Blockly.Chabuscript['circle'] = function(block) {
 
   if(value_radius.type == Type.NUMBER)
   {
-
-      return {shape: Shape.CIRCLE, radius: value_radius.address};
+      quadruples.push([Operation.CIRCLE, , value_radius.address, null]);
+      return {shape: Operation.CIRCLE, radius: value_radius.address};
   }else{
     var message = String.format(errors['INCOMPATIBLE'], 'circle');
     printToShell(message, true);
@@ -120,10 +145,13 @@ Blockly.Chabuscript['rectangle'] = function(block) {
   var value_height = Blockly.Chabuscript.valueToCode(block, 'height', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'rectangle at:' + value_point + ' w:' + value_width + ' h:' + value_height;
 
-  var pX = value_point.xVal; //address
-  var pY = value_point.yVal; //address
-
-  return code;
+  if(value_width.type == Type.NUMBER && value_height.type == Type.NUMBER)
+  {
+    quadruples.push([Operation.RECTANGLE, ,value_width, value_height]);
+    return {shape: Operation.RECTANGLE};
+  }else{
+    var message = String.format(errors['INCOMPATIBLE'], 'rectangle. Expecting a number.');
+  }
 };
 
 Blockly.Chabuscript['background'] = function(block) {
@@ -132,3 +160,10 @@ Blockly.Chabuscript['background'] = function(block) {
   quadruples.push([Operation.BCK, null, null, null]);
   return '';
 };
+
+// POLYGON POINTS
+// CIRCLE RADIUS
+// POINT X Y
+// LINE POINTX POINTY
+// RECTANGLE WIDTH HEIGHT
+// DRAW SHAPE WIDTH

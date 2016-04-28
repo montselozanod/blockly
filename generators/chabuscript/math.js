@@ -22,7 +22,7 @@ Blockly.Chabuscript['assign'] = function(block) {
 
     quadruples.push([op, arg1, arg2, result]);
 
-    return quadruples.length-1;
+    return '';
   }else{
     var message = String.format(errors['INCOMPATIBLE_TYPE_OP'], getTypeStringFromEnum(value_opizq.type), getTypeStringFromEnum(value_opder.type), 'assignment.');
     printToShell(message, true);

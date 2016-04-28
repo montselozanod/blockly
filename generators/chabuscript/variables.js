@@ -46,7 +46,14 @@
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
    var input = checkParamType(input);
-   //pOper.push(input);
+   var dim;
+   if(text_var_name in varTable)
+   {
+      dim = varTable[text_var_name][TableVarAccess.DIM];
+   }else{
+     dim = 0;
+   }
 
-   return {type: input[0], address: input[1]};
+   //pOper.push(input);
+   return {type: input[0], address: input[1], dimension: dim};
  };
