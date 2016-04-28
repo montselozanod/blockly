@@ -194,6 +194,7 @@ Blockly.Generator.prototype.valueToCode = function(block, name, order) {
     return '';
   }
   var tuple = this.blockToCode(targetBlock);
+  return tuple; //AGREGADO POR MONTSE
   if (tuple === '') {
     // Disabled block.
     return '';
