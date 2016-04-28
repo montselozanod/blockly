@@ -11,53 +11,54 @@ Blockly.Chabuscript['color'] = function(block) {
   var value_blue = Blockly.Chabuscript.valueToCode(block, 'blue', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'color(' + value_red + ',' + value_green + ',' + value_blue + ')';
 
-  var red = checkParamType(value_red, Type.NUMBER);
-  var green = checkParamType(value_green, Type.NUMBER);
-  var blue = checkParamType(value_blue, Type.NUMBER);
   var op = Operation.COLOR;
 
-  if(red[0] != Type.NUMBER)
+  if(value_red.type != Type.NUMBER)
   {
     var message = String.format(errors['INCORRECT_TYPE'], value_red, "color");
     printToShell(message, true);
-  }else if(green[0] != Type.NUMBER)
+  }else if(value_green.type != Type.NUMBER)
   {
     var message = String.format(errors['INCORRECT_TYPE'], value_green, "color");
     printToShell(message, true);
-  }else if(blue[0] != Type.NUMBER)
+  }else if(value_blue.type != Type.NUMBER)
   {
     var message = String.format(errors['INCORRECT_TYPE'], value_blue, "color");
     printToShell(message, true);
   }else {
-    quadruples.push([op, red[1], green[1], blue[1]]);
-    return code;
+    quadruples.push([op, value_red.address, value_green.address, value_blue.address]);
+    return {block: Block.COLOR};
   }
 };
 
 Blockly.Chabuscript['draw'] = function(block) {
   var value_shape = Blockly.Chabuscript.valueToCode(block, 'shape', Blockly.Chabuscript.ORDER_ATOMIC);
-  Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
+  var color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
 
   var op = Operation.PW;
   var inputPW = checkParamType(value_point_width);
-  if(inputPW[0] == Type.NUMBER)
+  if(color.block == Block.COLOR)
   {
-      if(shape in value_shape)
-      {
-        quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
-        quadruples.push([Operation.DRAW, value_shape.shape, null, null]);
-      }else{
-        var message = String.format(errors['SYNTAX_ERROR'], 'shape');
-        printToShell(message, true);
-      }
+    if(inputPW[0] == Type.NUMBER)
+    {
+        if(shape in value_shape)
+        {
+          quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
+          quadruples.push([Operation.DRAW, value_shape.shape, null, null]);
+        }else{
+          var message = String.format(errors['SYNTAX_ERROR'], 'shape');
+          printToShell(message, true);
+        }
+    }else{
+      var message = String.format(errors['INCORRECT_TYPE_OP'], 'point-width', 'DRAW');
+      printToShell(message, true);
+    }
   }else{
-    var message = String.format(errors['INCORRECT_TYPE_OP'], 'point-width', 'DRAW');
+    var message = String.format(errors['SYNTAX_ERROR'], 'color');
     printToShell(message, true);
   }
-
-  return code;
 };
 
 
@@ -107,7 +108,6 @@ Blockly.Chabuscript['polygon'] = function(block) {
       var op = Operation.POLYGON;
       quadruples.push([op, value_points.address, null, null]);
       return {shape: Operation.POLYGON};
-
     }else{
       //print incorrect type
       var message = String.format(errors['INCOMPATIBLE'], 'polygon');
@@ -125,10 +125,8 @@ Blockly.Chabuscript['circle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_radius = Blockly.Chabuscript.valueToCode(block, 'radius', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'circle at: ' + value_point + ' r:' + value_radius;
-  var pointX = value_point.xVal;
-  var pointY = value_point.yVal;
 
-  if(value_radius.type == Type.NUMBER)
+  if(value_radius.type == Type.NUMBER && value_radius.dimension == 0)
   {
       quadruples.push([Operation.CIRCLE, , value_radius.address, null]);
       return {shape: Operation.CIRCLE, radius: value_radius.address};
@@ -151,14 +149,21 @@ Blockly.Chabuscript['rectangle'] = function(block) {
     return {shape: Operation.RECTANGLE};
   }else{
     var message = String.format(errors['INCOMPATIBLE'], 'rectangle. Expecting a number.');
+    printToShell(message, true);
   }
 };
 
 Blockly.Chabuscript['background'] = function(block) {
   var value_color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'background ' + value_color;
-  quadruples.push([Operation.BCK, null, null, null]);
-  return '';
+  if(value_color.block == Block.COLOR)
+  {
+    quadruples.push([Operation.BCK, null, null, null]);
+    return '';
+  }else{
+    var message = String.format(errors['SYNTAX_ERROR'], 'color');
+    printToShell(message, true);
+  }
 };
 
 // POLYGON POINTS
