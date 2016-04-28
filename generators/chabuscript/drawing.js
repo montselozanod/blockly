@@ -38,14 +38,13 @@ Blockly.Chabuscript['draw'] = function(block) {
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
 
   var op = Operation.PW;
-  var inputPW = checkParamType(value_point_width);
   if(color.block == Block.COLOR)
   {
-    if(inputPW[0] == Type.NUMBER)
+    if(value_point_width.type == Type.NUMBER)
     {
         if(shape in value_shape)
         {
-          quadruples.push([op, inputPW[1], null, null]); //quadruple with PW
+          quadruples.push([op, value_point_width.address, null, null]); //quadruple with PW
           quadruples.push([Operation.DRAW, value_shape.shape, null, null]);
         }else{
           var message = String.format(errors['SYNTAX_ERROR'], 'shape');
@@ -66,14 +65,12 @@ Blockly.Chabuscript['point'] = function(block) {
   var value_x = Blockly.Chabuscript.valueToCode(block, 'x', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_y = Blockly.Chabuscript.valueToCode(block, 'y', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'point x:' + value_x + ' y:' + value_y;
-  var x = checkParamType(value_x);
-  var y = checkParamType(value_y);
 
-  if(x[0] != Type.NUMBER)
+  if(value_x.type != Type.NUMBER)
   {
     var message = String.format(errors['INCORRECT_TYPE'], value_x, "point");
     printToShell(message, true);
-  }else if(y[0] != Type.NUMBER)
+  }else if(value_y.type!= Type.NUMBER)
   {
     var message = String.format(errors['INCORRECT_TYPE'], value_y, "point");
     printToShell(message, true);
