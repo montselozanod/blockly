@@ -45,7 +45,7 @@
 
  Blockly.Chabuscript['variables_exist_var'] = function(block) {
    var text_var_name = block.getFieldValue('var_name');
-   var input = checkParamType(input);
+   var input = checkParamType(text_var_name);
    var dim;
    if(text_var_name in varTable)
    {
