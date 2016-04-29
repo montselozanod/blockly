@@ -37,15 +37,13 @@ Blockly.Chabuscript['draw'] = function(block) {
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
 
-  var op = Operation.PW;
   if(color.block == Block.COLOR)
   {
     if(value_point_width.type == Type.NUMBER)
     {
         if(shape in value_shape)
         {
-          quadruples.push([op, value_point_width.address, null, null]); //quadruple with PW
-          quadruples.push([Operation.DRAW, value_shape.shape, null, null]);
+          quadruples.push([Operation.DRAW, value_shape.shape, value_point_width.address, null]);
         }else{
           var message = String.format(errors['SYNTAX_ERROR'], 'shape');
           printToShell(message, true);
@@ -75,8 +73,8 @@ Blockly.Chabuscript['point'] = function(block) {
     var message = String.format(errors['INCORRECT_TYPE'], value_y, "point");
     printToShell(message, true);
   }else{
-    quadruples.push([Operation.POINT, x[1], y[1], null]);
-    return {shape: Operation.POINT, xVal:x[1], yVal:y[1]};
+    quadruples.push([Operation.POINT, value_x.address, value_y.address, null]);
+    return {shape: Operation.POINT, xVal:value_x.address, yVal:value_y.address};
   }
 };
 
