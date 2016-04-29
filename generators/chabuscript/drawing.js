@@ -123,7 +123,7 @@ Blockly.Chabuscript['circle'] = function(block) {
 
   if(value_radius.type == Type.NUMBER && value_radius.dimension == 0)
   {
-      quadruples.push([Operation.CIRCLE, , value_radius.address, null]);
+      quadruples.push([Operation.CIRCLE,value_radius.address ,null , null]);
       return {shape: Operation.CIRCLE, radius: value_radius.address};
   }else{
     var message = String.format(errors['INCOMPATIBLE'], 'circle');
