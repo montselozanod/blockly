@@ -82,7 +82,7 @@ Blockly.Chabuscript['line'] = function(block) {
   var value_point1 = Blockly.Chabuscript.valueToCode(block, 'point1', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point2 = Blockly.Chabuscript.valueToCode(block, 'point2', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  if(value_point1.shape === Shape.POINT && value_point2.shape === Shape.POINT)
+  if(value_point1.shape === Operation.POINT && value_point2.shape === Operation.POINT)
   {
     return {shape: Operation.LINE};
   }else{
