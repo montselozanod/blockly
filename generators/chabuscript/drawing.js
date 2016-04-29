@@ -41,7 +41,7 @@ Blockly.Chabuscript['draw'] = function(block) {
   {
     if(value_point_width.type == Type.NUMBER)
     {
-        if(shape in value_shape)
+        if('shape' in value_shape)
         {
           quadruples.push([Operation.DRAW, value_shape.shape, value_point_width.address, null]);
         }else{
