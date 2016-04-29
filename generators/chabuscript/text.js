@@ -8,13 +8,8 @@ Blockly.Chabuscript['print'] = function(block) {
   var value_print_stmt = Blockly.Chabuscript.valueToCode(block, 'print-stmt', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'print' + value_print_stmt + ';';
 
-  var op, arg1, arg2, result;
-  //TODO
-  op = Operation.PRINT;
-  arg1 = null;
-  arg2 = null;
   // the value to code should return the address number of what to print
-  quadruples.push([op, arg1, arg2, value_print_stmt]);
+  quadruples.push([Operation.PRINT, value_print_stmt.address, null, null]);
 
   return quadruples.length-1;
 };
