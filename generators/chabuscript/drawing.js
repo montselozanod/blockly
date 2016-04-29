@@ -140,7 +140,7 @@ Blockly.Chabuscript['rectangle'] = function(block) {
 
   if(value_width.type == Type.NUMBER && value_height.type == Type.NUMBER)
   {
-    quadruples.push([Operation.RECTANGLE, ,value_width, value_height]);
+    quadruples.push([Operation.RECTANGLE, value_width.address,value_height.address, null]);
     return {shape: Operation.RECTANGLE};
   }else{
     var message = String.format(errors['INCOMPATIBLE'], 'rectangle. Expecting a number.');
