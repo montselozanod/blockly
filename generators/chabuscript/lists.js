@@ -151,12 +151,12 @@ Blockly.Chabuscript['remove_item'] = function(block) {
     //verificar index
     if(indexInfo[0] == Type.NUMBER)
     {
-      var op = Operation.SUM;
+      var op = Operation.VER;
+      quadruples.push([op, indexInfo[1], 0, varTable[text_list_name][TableVarAccess.SIZE]]);
+
+      op = Operation.SUM;
       var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
       quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
-
-      op = Operation.VER;
-      quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
       op = Operation.REMOVE;
       quadruples.push([op, [resultIndexAdd], null, null]);
