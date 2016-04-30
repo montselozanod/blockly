@@ -102,7 +102,7 @@ Blockly.Chabuscript['list_put'] = function(block) {
 
       quadruples.push([op, indexInfo[1], 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
-      op = Operation.SUM;
+      op = Operation.SUM_INDEX;
       quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
 
       //verificar lo que vas agregar
@@ -154,7 +154,7 @@ Blockly.Chabuscript['remove_item'] = function(block) {
       var op = Operation.VER;
       quadruples.push([op, indexInfo[1], 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
-      op = Operation.SUM;
+      op = Operation.SUM_INDEX;
       var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
       quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
 
