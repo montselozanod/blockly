@@ -88,41 +88,49 @@ Blockly.Chabuscript['list_put'] = function(block) {
 
   var indexInfo = checkParamType(text_index);
 
+  var isList = varTable[text_list_name][TableVarAccess.DIM]
   var listType = varTable[text_list_name][TableVarAccess.TYPE];
   var value = checkInputType(text_item, listType);
 
-  //verificar index
-  if(indexInfo[0] == Type.NUMBER)
+  if(isList == 1)
   {
-    var op = Operation.SUM;
-    var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
-    quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
-
-    op = Operation.VER;
-    quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
-
-    //verificar lo que vas agregar
-    op = Operation.PUT;
-    var valueAddress;
-    if(text_item in varTable && varTable[text_item][TableVarAccess.TYPE] == listType)
+    //verificar index
+    if(indexInfo[0] == Type.NUMBER)
     {
-          //input is a variable
-        valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
+      var op = Operation.VER;
+      var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
+
+      quadruples.push([op, indexInfo[1], 0, varTable[text_list_name][TableVarAccess.SIZE]]);
+
+      op = Operation.SUM;
+      quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+
+      //verificar lo que vas agregar
+      op = Operation.PUT;
+      var valueAddress;
+      if(text_item in varTable && varTable[text_item][TableVarAccess.TYPE] == listType)
+      {
+            //input is a variable
+          valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
+          quadruples.push([op, valueAddress, null, [resultIndexAdd]]);
+          return '';
+      }
+      else if(value[0] != false)
+      {
+        //input is a constant
+        valueAddress = addConstant(value[1], listType);
         quadruples.push([op, valueAddress, null, [resultIndexAdd]]);
         return '';
-    }
-    else if(value[0] != false)
-    {
-      //input is a constant
-      valueAddress = addConstant(value[1], listType);
-      quadruples.push([op, valueAddress, null, [resultIndexAdd]]);
-      return '';
+      }else{
+        var message = String.format(errors['INCORRECT_TYPE'], text_item, text_list_name);
+        printToShell(message, true);
+      }
     }else{
-      var message = String.format(errors['INCORRECT_TYPE'], text_item, text_list_name);
+      var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name); //index must be a number
       printToShell(message, true);
     }
   }else{
-    var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
+    var message = String.format(erros['INVALID_OP'], text_list_name);
     printToShell(message, true);
   }
 
@@ -135,22 +143,29 @@ Blockly.Chabuscript['remove_item'] = function(block) {
 
   var indexInfo = checkParamType(text_index);
 
+  var isList = varTable[text_list_name][TableVarAccess.DIM];
   var listType = varTable[text_list_name][TableVarAccess.TYPE];
 
-  //verificar index
-  if(indexInfo[0] == Type.NUMBER)
+  if(isList == 1)
   {
-    var op = Operation.SUM;
-    var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
-    quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+    //verificar index
+    if(indexInfo[0] == Type.NUMBER)
+    {
+      var op = Operation.SUM;
+      var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
+      quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
 
-    op = Operation.VER;
-    quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
+      op = Operation.VER;
+      quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
-    op = Operation.REMOVE;
-    quadruples.push([op, [resultIndexAdd], null, null]);
+      op = Operation.REMOVE;
+      quadruples.push([op, [resultIndexAdd], null, null]);
+    }else{
+      var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
+      printToShell(message, true);
+    }
   }else{
-    var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
+    var message = String.format(erros['INVALID_OP'], text_list_name);
     printToShell(message, true);
   }
 
