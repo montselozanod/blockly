@@ -108,14 +108,14 @@ Blockly.Chabuscript['list_put'] = function(block) {
     {
           //input is a variable
         valueAddress = varTable[text_item][TableVarAccess.ADDRESS];
-        quadruples.push([op, valueAddress, null, (resultIndexAdd)]);
+        quadruples.push([op, valueAddress, null, [resultIndexAdd]]);
         return '';
     }
     else if(value[0] != false)
     {
       //input is a constant
       valueAddress = addConstant(value[1], listType);
-      quadruples.push([op, valueAddress, null, (resultIndexAdd)]);
+      quadruples.push([op, valueAddress, null, [resultIndexAdd]]);
       return '';
     }else{
       var message = String.format(errors['INCORRECT_TYPE'], text_item, text_list_name);
@@ -148,7 +148,7 @@ Blockly.Chabuscript['remove_item'] = function(block) {
     quadruples.push([op, resultIndexAdd, 0, varTable[text_list_name][TableVarAccess.SIZE]]);
 
     op = Operation.REMOVE;
-    quadruples.push([op, (resultIndexAdd), null, null]);
+    quadruples.push([op, [resultIndexAdd], null, null]);
   }else{
     var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
     printToShell(message, true);
