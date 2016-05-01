@@ -132,9 +132,9 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
 Blockly.Chabuscript['invokevoidfunc'] = function(block) {
   var text_func_id = block.getFieldValue('func_id');
   currentFuncName = text_func_id;
-  if(funcIsUnique(text_func_name))
+  if(funcIsUnique(text_func_id))
   {
-    var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_name);
+    var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_id);
     printToShell(message, true);
   }else{
     var op = Opeation.ERA;
