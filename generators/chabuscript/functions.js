@@ -40,10 +40,11 @@ Blockly.Chabuscript['func_block'] = function(block) {
 
 Blockly.Chabuscript['main'] = function(block) {
   initMemVars();
+  var startQuad = quadruples.length; // num de cuadruplo donde empieza su codigo
+
   var statements_maint_stmts = Blockly.Chabuscript.statementToCode(block, 'maint_stmts');
   var code = 'start {' + statements_maint_stmts + '} end';
 
-  var startQuad = quadruples.length; // num de cuadruplo donde empieza su codigo
   addProc('start', Type.MAIN, startQuad, [], 0 /* TODO NumVars del main*/ );
 
   quadruples.push([Operation.END, null, null, null]);
