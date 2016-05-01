@@ -63,6 +63,19 @@ Blockly.Blocks['list_put'] = {
   }
 };
 
+Blockly.Blocks['list_get'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("in list")
+        .appendField(new Blockly.FieldTextInput("NAME"), "list_name")
+        .appendField("get item at")
+        .appendField(new Blockly.FieldTextInput("INDEX"), "index");
+    this.setOutput(true, null);
+    this.setColour(90);
+    this.setTooltip('');
+  }
+};
+
   Blockly.Blocks['remove_item'] = {
     init: function() {
       this.appendDummyInput()

@@ -51,15 +51,12 @@ Blockly.Blocks['param_block'] = {
   }
 };
 
-
 Blockly.Blocks['return_stmt'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("return")
-        .appendField(new Blockly.FieldTextInput("VALUE"), "value");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.appendValueInput("return_value")
+        .setCheck(null)
+        .appendField("return");
+    this.setPreviousStatement(true, null);
     this.setColour(300);
     this.setTooltip('');
   }

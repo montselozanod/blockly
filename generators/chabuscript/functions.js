@@ -11,7 +11,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
   var text_funcname = block.getFieldValue('funcName');
   Blockly.Chabuscript.statementToCode(block, 'params');
-  var statements_stmts = Blockly.Chabuscript.statementToCode(block, 'stmts');
+  Blockly.Chabuscript.statementToCode(block, 'stmts');
 
   if(funcIsUnique(text_funcname))
   {
@@ -31,11 +31,11 @@ Blockly.Chabuscript['func_block'] = function(block) {
 
     quadruples.push([Operation.RET, null, null, null]); // regresar control a la funcion que invoco
     params = []; // eliminate params for next func
+    return '';
   }else{
     var message = String.format(errors['DUPLICATE_FUNCTION_NAME'], text_funcname);
     printToShell(message, true); // we are printing an error
   }
-  return code;
 };
 
 Blockly.Chabuscript['main'] = function(block) {
@@ -85,16 +85,14 @@ Blockly.Chabuscript['param_block'] = function(block) {
 };
 
 Blockly.Chabuscript['return_stmt'] = function(block) {
-  var text_value = block.getFieldValue('value');
+  var value_return_value = Blockly.Chabuscript.valueToCode(block, 'return_value', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'return ' + text_value + ';';
 
   var op = Operation.RTRN;
-  result = tmpNumMem++; //TODO el result del return
-  arg1 = null;
-  arg2 = null;
+  var result = value_return_value.address;
 
-  quadruples.push([op, result, arg1, arg2]);
-  return '';
+  quadruples.push([op, result, null, null]);
+  return code;
 };
 
 Blockly.Chabuscript['invokefuncreturn'] = function(block) {
@@ -121,7 +119,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
     }
     var address = tmpNumMem++;
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
-    quadruples.push([Operation.ASSIGN, text_func_name, null, address]); //assign de return value of de function
+    quadruples.push([Operation.ASSIGN_FUNC, text_func_name, null, address]); //assign de return value of de function
   }
 
   paramNumber = 0; //regresar valor a cero otra vez

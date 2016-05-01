@@ -136,6 +136,37 @@ Blockly.Chabuscript['list_put'] = function(block) {
 
 };
 
+Blockly.Chabuscript['list_get'] = function(block) {
+  var text_list_name = block.getFieldValue('list_name');
+  var text_index = block.getFieldValue('index');
+
+  var indexInfo = checkParamType(text_index);
+  var isList = varTabl[text_list_name][TableVarAccess.DIM];
+  var listType = varTable[text_list_name][TableVarAccess.TYPE];
+
+  if(isList == 1)
+  {
+    //check if index is a number
+    if(indexInfo[0] == Type.NUMBER)
+    {
+      var op = Operation.VER;
+      quadruples.push([op, indexInfo[1], 0, varTable[text_list_name][TableVarAccess.SIZE]]);
+
+      op = Operation.SUM_INDEX;
+      var resultIndexAdd = tmpNumMem++; //obtener una direccion temporal donde guardar la suma
+      quadruples.push([op, indexInfo[1], varTable[text_list_name][TableVarAccess.ADDRESS], resultIndexAdd]);
+
+      return {type: listType, address: [resultIndexAdd]};
+    }else{
+      var message = String.format(errors['INCORRECT_TYPE'], text_index, text_list_name);
+      printToShell(message, true);
+    }
+  }else{
+    var message = String.format(erros['INVALID_OP'], text_list_name);
+    printToShell(message, true);
+  }
+};
+
 
 Blockly.Chabuscript['remove_item'] = function(block) {
   var text_list_name = block.getFieldValue('list_ITEM');
