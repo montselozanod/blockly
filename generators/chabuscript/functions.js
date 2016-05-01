@@ -137,7 +137,7 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
     var message = String.format(errors['UNDECLARED_FUNCTION'], text_func_id);
     printToShell(message, true);
   }else{
-    var op = Opeation.ERA;
+    var op = Operation.ERA;
     quadruples.push([op, text_func_id]);
     //transformar params
     var params = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion

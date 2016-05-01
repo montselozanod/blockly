@@ -75,6 +75,19 @@ BlocklyStorage.link = function(opt_workspace) {
   BlocklyStorage.makeRequest_('/storage', 'xml', data, workspace);
 };
 
+BlocklyStorage.save = function(opt_workspace)
+{
+  var workspace = opt_workspace || Blockly.getMainWorkspace();
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  var data = Blockly.Xml.domToText(xml);
+  return data;
+};
+
+BlocklyStorage.upload = function(opt_workspace)
+{
+
+};
+
 /**
  * Retrieve XML text from database using given key.
  * @param {string} key Key to XML, obtained from href.
