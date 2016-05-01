@@ -37,7 +37,6 @@ Blockly.Chabuscript['term'] = function(block) {
   var code = value_opizq + ' ' + dropdown_op + ' ' + value_opder;
 
   var op, arg1, arg2, result;
-
   if (dropdown_op == "MULT") {
     op = Operation.MULT;
   }
@@ -45,13 +44,22 @@ Blockly.Chabuscript['term'] = function(block) {
     op = Operation.DIV;
   }
 
-  arg1 = numMem++;
-  arg2 = numMem++;
-  result = tmpNumMem++;
+  var resultType = semanticCube[value_opizq.type][value_opder.type][op];
 
-  quadruples.push([op, arg1, arg2, result]);
+  if(resultType != Type.ERR)
+  {
+    arg1 = value_opizq.address;
+    arg2 = value_opder.address;
+    result = tmpNumMem++;
 
-  return {type: Type.NUMBER, address: result};
+    quadruples.push([op, arg1, arg2, result]);
+
+    return {type: resultType, address: result};
+  }else{
+    //ERROR
+    var message= String.format(errors['INCOMPATIBLE_TYPE_OP'], getTypeStringFromEnum(value_opizq.type), getTypeStringFromEnum(value_opder.type), dropdown_op);
+    printToShell(message, true);
+  }
 };
 
 Blockly.Chabuscript['exp'] = function(block) {
@@ -69,13 +77,22 @@ Blockly.Chabuscript['exp'] = function(block) {
     op = Operation.MINUS;
   }
 
-  arg1 = numMem++;
-  arg2 = numMem++;
-  result = tmpNumMem++;
+  var resultType = semanticCube[value_opizq.type][value_opder.type][op];
 
-  quadruples.push([op, arg1, arg2, result]);
+  if(resultType != Type.ERR)
+  {
+    arg1 = value_opizq.address;
+    arg2 = value_opder.address;
+    result = tmpNumMem++;
 
-  return {type: Type.NUMBER, address: result};
+    quadruples.push([op, arg1, arg2, result]);
+
+    return {type: resultType, address: result};
+  }else{
+    //ERROR
+    var message= String.format(errors['INCOMPATIBLE_TYPE_OP'], getTypeStringFromEnum(value_opizq.type), getTypeStringFromEnum(value_opder.type), dropdown_op);
+    printToShell(message, true);
+  }
 };
 
 

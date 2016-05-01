@@ -76,6 +76,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
 
     }
     addLocalVar(text_param_name, type, address, 0);
+    quadruples.push([Operation.PAR_ASSIGN, address, null, null]);
     params.push(type);
     return '';
   } else {
@@ -117,13 +118,14 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
       printToShell(message, true); //this is an error
       return;
     }
-    var address = tmpNumMem++;
+    var gAddress = tmpNumMem++;
     quadruples.push([Operation.GOSUB, dirInicio, null, null ]);
-    quadruples.push([Operation.ASSIGN_FUNC, text_func_name, null, address]); //assign de return value of de function
+    quadruples.push([Operation.ASSIGN_FUNC, text_func_name, null, gAddress]); //assign de return value of de function
+
+    paramNumber = 0; //regresar valor a cero otra vez
+    return {type: dirProcs[text_func_name][DirProcAccess.TYPE] , address: gAddress};
   }
 
-  paramNumber = 0; //regresar valor a cero otra vez
-  return code;
 };
 
 Blockly.Chabuscript['invokevoidfunc'] = function(block) {
