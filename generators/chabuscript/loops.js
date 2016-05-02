@@ -12,7 +12,7 @@ Blockly.Chabuscript['loop_while'] = function(block) {
 
   var value_while_cond = Blockly.Chabuscript.valueToCode(block, 'while_cond', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  if (checkInputType(value_while_cond, Type.BOOL)) {
+  if (value_while_cond.type == Type.BOOL) {
     var flag = pilaO.pop();
     quadruples.push([Operation.GOTOF, flag, null, 0]);
     var jump = quadruples.length-1;

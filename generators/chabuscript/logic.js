@@ -7,7 +7,7 @@ goog.require('Blockly.Chabuscript');
 Blockly.Chabuscript['logic_if'] = function(block) {
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  if (checkInputType(value_if, Type.BOOL)) {
+  if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop();
     quadruples.push([Operation.GOTOF, flag, null, 0]);
     var jump_false = quadruples.length-1; // push pSaltos cont-1
@@ -27,7 +27,7 @@ Blockly.Chabuscript['logic_if'] = function(block) {
 Blockly.Chabuscript['logic_if_else'] = function(block) {
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  if (checkInputType(value_if, Type.BOOL)) {
+  if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop();
     quadruples.push([Operation.GOTOF, flag, null, 0]);
     var jump_false = quadruples.length-1; // push pSaltos cont-1
@@ -54,7 +54,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
 
   var value_if = Blockly.Chabuscript.valueToCode(block, 'IF', Blockly.Chabuscript.ORDER_ATOMIC);
 
-  if (checkInputType(value_if, Type.BOOL)) {
+  if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop(); // valor de la condicion
     quadruples.push([Operation.GOTOF, flag, null, 0]);
     var jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar if
