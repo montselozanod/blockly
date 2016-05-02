@@ -88,7 +88,7 @@ Blockly.Chabuscript['param_block'] = function(block) {
 
 Blockly.Chabuscript['return_stmt'] = function(block) {
   var value_return_value = Blockly.Chabuscript.valueToCode(block, 'return_value', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = 'return ' + text_value + ';';
+  var code = 'return stmt;';
 
   var op = Operation.RTRN;
   var result = value_return_value.address;
