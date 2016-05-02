@@ -100,13 +100,12 @@ Blockly.Blocks['invokevoidfunc'] = {
 
 Blockly.Blocks['func_param'] = {
   init: function() {
-    this.appendValueInput("param_name")
+    this.appendValueInput("next_param")
         .setCheck(null)
         .appendField(new Blockly.FieldTextInput("param name"), "param");
     this.setInputsInline(false);
     this.setOutput(true, "param");
     this.setColour(300);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
