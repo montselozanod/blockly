@@ -162,7 +162,7 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
 Blockly.Chabuscript['func_param'] = function(block) {
   var text_param = block.getFieldValue('param');
   var funcParams = getProcParams(currentFuncName);
-  var expectedType = funcParams[paramNumber + 1];
+  var expectedType = funcParams[paramNumber];
   var typeAddress = checkParamType(text_param);
   var varType = typeAddress[0];
   var address = typeAddress[1];
@@ -174,8 +174,8 @@ Blockly.Chabuscript['func_param'] = function(block) {
     printToShell(message, true);
   }else{
     var op = Operation.PARAM;
-    var pNumber = ++paramNumber;
-    quadruples.push([op, address, null, pNumber]);
+    quadruples.push([op, address, null, paramNumber]);
+    paramNumber++;
     return text_param;
   }
 };
