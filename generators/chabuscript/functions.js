@@ -114,7 +114,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
     // Check if number of params with which function is being invoked is the correct one
     if(paramNumber != funcParamNum)
     {
-      var message = String.format(errors['PARAMETER_LENGTH_MISMATCH'], text_func_id, funcParamNum, paramNumber);
+      var message = String.format(errors['PARAMETER_LENGTH_MISMATCH'], text_func_name, funcParamNum, paramNumber);
       printToShell(message, true); //this is an error
       return;
     }
