@@ -15,7 +15,7 @@ Blockly.Chabuscript['loop_while'] = function(block) {
   if (value_while_cond.type == Type.BOOL) {
     var flag = pilaO.pop();
     quadruples.push([Operation.GOTOF, flag, null, 0]);
-    var jump = quadruples.length-1;
+    var jump = quadruples.length;
 
     Blockly.Chabuscript.statementToCode(block, 'while_stmts');
 
