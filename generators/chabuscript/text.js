@@ -11,7 +11,7 @@ Blockly.Chabuscript['print'] = function(block) {
   // the value to code should return the address number of what to print
   quadruples.push([Operation.PRINT, value_print_stmt.address, null, null]);
 
-  return quadruples.length-1;
+  return '';
 };
 
 
@@ -19,13 +19,8 @@ Blockly.Chabuscript['print_ctestring'] = function(block) {
   var text_print_txt = block.getFieldValue('print_txt');
   var code = 'print' + text_print_txt + ';';
 
-  var op, arg1, arg2, result;
+  var address = addConstant(text_print_txt);
+  quadruples.push([Operation.PRINT, address, null, null]);
 
-  op = Operation.PRINT;
-  arg1 = null;
-  arg2 = null;
-  address = addConstant(text_print_txt);
-  quadruples.push([op, arg1, arg2, address]);
-
-  return quadruples.length-1;
+  return '';
 };
