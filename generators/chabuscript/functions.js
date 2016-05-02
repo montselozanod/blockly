@@ -111,7 +111,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
     var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
 
     var dirInicio = dirProcs[text_func_name][DirProcAccess.QUADINI];
-
+    var funcParamNum = getProcParams(text_func_name).length;
     // Check if number of params with which function is being invoked is the correct one
     if(paramNumber != funcParamNum)
     {
