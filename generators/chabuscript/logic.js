@@ -66,7 +66,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
     var jump_if = quadruples.length-1; // el quad que debe rellenar despues de brincar elsif y else
 
     var value_elsif = Blockly.Chabuscript.valueToCode(block, 'ELSIF', Blockly.Chabuscript.ORDER_ATOMIC);
-    if (value_elsif == Type.BOOL) {
+    if (value_elsif.type == Type.BOOL) {
       flag = pilaO.pop();
       quadruples.push([Operation.GOTOF, value_elsif.address, null, 0]);
       jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar elsif
@@ -83,8 +83,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
       quadruples[jump_elseif][3] = quadruples.length; // a donde debe brincar despues de terminar el elseif
 
       return '';
-    }
-    else {
+    }else {
       var message = String.format(errors['BOOL_CONDITION'], "Else-if");
       printToShell(message, true);
     }
