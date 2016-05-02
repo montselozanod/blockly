@@ -9,7 +9,7 @@ Blockly.Chabuscript['logic_if'] = function(block) {
 
   if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop();
-    quadruples.push([Operation.GOTOF, flag, null, 0]);
+    quadruples.push([Operation.GOTOF, value_if.address, null, 0]);
     var jump_false = quadruples.length-1; // push pSaltos cont-1
 
     Blockly.Chabuscript.statementToCode(block, 'IF_DO');
@@ -29,7 +29,7 @@ Blockly.Chabuscript['logic_if_else'] = function(block) {
 
   if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop();
-    quadruples.push([Operation.GOTOF, flag, null, 0]);
+    quadruples.push([Operation.GOTOF, value_if.address, null, 0]);
     var jump_false = quadruples.length-1; // push pSaltos cont-1
 
     Blockly.Chabuscript.statementToCode(block, 'IF_DO');
@@ -56,7 +56,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
 
   if (value_if.type == Type.BOOL) {
     var flag = pilaO.pop(); // valor de la condicion
-    quadruples.push([Operation.GOTOF, flag, null, 0]);
+    quadruples.push([Operation.GOTOF, value_if.address, null, 0]);
     var jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar if
 
     Blockly.Chabuscript.statementToCode(block, 'IF_DO');
@@ -68,7 +68,7 @@ Blockly.Chabuscript['logic_if_elsif_else'] = function(block) {
     var value_elsif = Blockly.Chabuscript.valueToCode(block, 'ELSIF', Blockly.Chabuscript.ORDER_ATOMIC);
     if (value_elsif == Type.BOOL) {
       flag = pilaO.pop();
-      quadruples.push([Operation.GOTOF, flag, null, 0]);
+      quadruples.push([Operation.GOTOF, value_elsif.address, null, 0]);
       jump_false = quadruples.length-1; // el quad que debe rellenar despues de brincar elsif
 
       Blockly.Chabuscript.statementToCode(block, 'ELSIF_DO');
