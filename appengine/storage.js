@@ -83,11 +83,6 @@ BlocklyStorage.save = function(opt_workspace)
   return data;
 };
 
-BlocklyStorage.upload = function(opt_workspace)
-{
-
-};
-
 /**
  * Retrieve XML text from database using given key.
  * @param {string} key Key to XML, obtained from href.

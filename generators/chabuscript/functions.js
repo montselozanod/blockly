@@ -108,7 +108,7 @@ Blockly.Chabuscript['invokefuncreturn'] = function(block) {
     var op = Operation.ERA;
     quadruples.push([op, text_func_name, null, null]);
 
-    var value_params = Blockly.Chabuscript.valueToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+    var value_params = Blockly.Chabuscript.statementToCode(block, 'params', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
 
     var dirInicio = dirProcs[text_func_name][DirProcAccess.QUADINI];
 
@@ -138,9 +138,9 @@ Blockly.Chabuscript['invokevoidfunc'] = function(block) {
     printToShell(message, true);
   }else{
     var op = Operation.ERA;
-    quadruples.push([op, text_func_id]);
+    quadruples.push([op, text_func_id, null, null]);
     //transformar params
-    var params = Blockly.Chabuscript.valueToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
+    var params = Blockly.Chabuscript.statementToCode(block, 'NAME', Blockly.Chabuscript.ORDER_ATOMIC); //params de funcion
     var dirInicio = dirProcs[text_func_id][1];
     var funcParamNum = getProcParams(text_func_id).length;
 
