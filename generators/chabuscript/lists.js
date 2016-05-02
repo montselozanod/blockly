@@ -141,7 +141,7 @@ Blockly.Chabuscript['list_get'] = function(block) {
   var text_index = block.getFieldValue('index');
 
   var indexInfo = checkParamType(text_index);
-  var isList = varTabl[text_list_name][TableVarAccess.DIM];
+  var isList = varTable[text_list_name][TableVarAccess.DIM];
   var listType = varTable[text_list_name][TableVarAccess.TYPE];
 
   if(isList == 1)
