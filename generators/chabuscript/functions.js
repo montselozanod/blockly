@@ -11,7 +11,6 @@ Blockly.Chabuscript['func_block'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
   var text_funcname = block.getFieldValue('funcName');
   Blockly.Chabuscript.statementToCode(block, 'params');
-  Blockly.Chabuscript.statementToCode(block, 'stmts');
 
   if(funcIsUnique(text_funcname))
   {
@@ -28,7 +27,7 @@ Blockly.Chabuscript['func_block'] = function(block) {
       break;
     }
     addProc(text_funcname, type, startQuad, params, 0 /* TODO NumVars del main*/ );
-
+    Blockly.Chabuscript.statementToCode(block, 'stmts');
     quadruples.push([Operation.RET, null, null, null]); // regresar control a la funcion que invoco
     params = []; // eliminate params for next func
     return '';
