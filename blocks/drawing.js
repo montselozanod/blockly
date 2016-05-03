@@ -75,13 +75,19 @@ Blockly.Blocks['line'] = {
   }
 };
 
+
 Blockly.Blocks['polygon'] = {
   init: function() {
-    this.appendValueInput("points")
-        .setCheck("list")
-        .appendField("POLYGON with Points");
-    this.setInputsInline(true);
-    this.setOutput(true, "shape");
+    this.appendValueInput("point")
+        .setCheck(null)
+        .appendField("POLYGON at Point");
+    this.appendValueInput("num_sides")
+        .setCheck(null)
+        .appendField("Number of Sides");
+    this.appendValueInput("side_length")
+        .setCheck(null)
+        .appendField("Side Length");
+    this.setOutput(true, null);
     this.setColour(180);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

@@ -94,28 +94,31 @@ Blockly.Chabuscript['line'] = function(block) {
 };
 
 Blockly.Chabuscript['polygon'] = function(block) {
-  var value_points = Blockly.Chabuscript.valueToCode(block, 'points', Blockly.Chabuscript.ORDER_ATOMIC);
-  var code = 'polygon points ' + value_points;
-  // {[op, points]}
-  if(value_points.dimension == 1)
+  var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_num_sides = Blockly.Chabuscript.valueToCode(block, 'num_sides', Blockly.Chabuscript.ORDER_ATOMIC);
+  var value_side_length = Blockly.Chabuscript.valueToCode(block, 'side_length', Blockly.Chabuscript.ORDER_ATOMIC);
+
+  if(value_point.shape === Operation.POINT)
   {
-    if(value_points.type == Type.NUMBER)
+    if(value_num_sides.type == Type.NUMBER)
     {
-      var op = Operation.POLYGON;
-      quadruples.push([op, value_points.address, null, null]);
-      return {shape: Operation.POLYGON};
+      if(value_side_length.type == Type.NUMBER)
+      {
+        quadruples.push([Operation.POLYGON, value_num_sides.address, value_side_length.address, null]);
+        return {shape: Operation.POLYGON};
+      }else{
+        var message = String.format(errors['INCOMPATIBLE'], 'polygon');
+        printToShell(message, true);
+      }
     }else{
-      //print incorrect type
       var message = String.format(errors['INCOMPATIBLE'], 'polygon');
       printToShell(message, true);
     }
   }else{
-    var message = "Invalid type: input is not a list for operation polygon";
+    var message = String.format(errors['SYNTAX_ERROR'], 'point');
     printToShell(message, true);
   }
-
 };
-
 
 Blockly.Chabuscript['circle'] = function(block) {
   var value_point = Blockly.Chabuscript.valueToCode(block, 'point', Blockly.Chabuscript.ORDER_ATOMIC);
