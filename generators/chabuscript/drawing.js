@@ -165,6 +165,11 @@ Blockly.Chabuscript['background'] = function(block) {
   }
 };
 
+Blockly.Chabuscript['clear'] = function(block) {
+  quadruples.push([Operation.CLEAR, null, null, null]);
+  return '';
+};
+
 // POLYGON POINTS
 // CIRCLE RADIUS
 // POINT X Y
