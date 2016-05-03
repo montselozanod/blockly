@@ -44,6 +44,7 @@ Blockly.Chabuscript['draw'] = function(block) {
         if('shape' in value_shape)
         {
           quadruples.push([Operation.DRAW, value_shape.shape, value_point_width.address, null]);
+          return '';
         }else{
           var message = String.format(errors['SYNTAX_ERROR'], 'shape');
           printToShell(message, true);
