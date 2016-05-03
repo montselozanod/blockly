@@ -136,6 +136,8 @@ Blockly.Blocks['draw'] = {
     this.appendValueInput("point-width")
         .setCheck("Number")
         .appendField("width");
+    this.appendValueInput("anim")
+        .appendField("animation");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

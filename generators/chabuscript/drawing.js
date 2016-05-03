@@ -33,6 +33,7 @@ Blockly.Chabuscript['color'] = function(block) {
 
 Blockly.Chabuscript['draw'] = function(block) {
   var value_shape = Blockly.Chabuscript.valueToCode(block, 'shape', Blockly.Chabuscript.ORDER_ATOMIC);
+  var anim_val = Blockly.Chabuscript.valueToCode(block, 'anim', Blockly.Chabuscript.ORDER_ATOMIC);
   var color = Blockly.Chabuscript.valueToCode(block, 'color', Blockly.Chabuscript.ORDER_ATOMIC);
   var value_point_width = Blockly.Chabuscript.valueToCode(block, 'point-width', Blockly.Chabuscript.ORDER_ATOMIC);
   var code = 'draw shape ' + value_shape + ' ' + value_color + ' pw:' + value_point_width +';';
